@@ -8,6 +8,7 @@
 
 #import "MMTableViewController.h"
 #import "MMDataStoreController.h"
+#import "MMConstants.h"
 
 @interface MMTableViewController () <UIAlertViewDelegate>
 
@@ -21,9 +22,6 @@
 {
     [super viewDidLoad];
     
-    self.view.window.tintColor = [UIColor purpleColor];
-    self.navigationController.navigationBar.tintColor = [UIColor purpleColor];
-    
     [self.tableView registerClass:UITableViewCell.class forCellReuseIdentifier:@"MMTableViewCell"];
         
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
@@ -33,12 +31,16 @@
 {
     [super viewDidAppear:animated];
     
-    [[[UIAlertView alloc] initWithTitle:@"Random Mantra"
-                                message:[MMDataStoreController randomNonRepeatingMantra]
-                               delegate:nil
-                      cancelButtonTitle:@"Thank You"
-                      otherButtonTitles:nil, nil]
-     show];
+    BOOL noGreetingNameSaved = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey] == nil;
+    
+    if (noGreetingNameSaved)
+    {
+        [self inputName];
+    }
+    else
+    {
+        [self showRandomMantra];
+    }
 }
 
 - (IBAction)addMantraButtonTapped:(id)sender
@@ -55,19 +57,54 @@
                                           otherButtonTitles:@"Add Mantra", nil];
     
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alert.tag = 1;
     [alert show];
 }
 
+- (void)inputName
+{
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What's your name?"
+                                                    message:@"Enter your name below to personalize your Morning Mantra"
+                                                   delegate:self
+                                          cancelButtonTitle:@"No Thanks"
+                                          otherButtonTitles:@"Save", nil];
+    
+    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+    alert.tag = 2;
+    [alert show];
+}
+
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-    
-    if([title isEqualToString:@"Add Mantra"])
+    if (alertView.tag == 1)
     {
-        NSString *username = [alertView textFieldAtIndex:0].text;
+        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
         
-        [MMDataStoreController addMantra:username];
-        [self.tableView reloadData];
+        if([title isEqualToString:@"Add Mantra"])
+        {
+            NSString *mantra = [alertView textFieldAtIndex:0].text;
+            
+            DebugLog(@"new mantra to add %@", mantra);
+            
+            [MMDataStoreController addMantra:mantra];
+            [self.tableView reloadData];
+        }
+    }
+    else if (alertView.tag == 2)
+    {
+        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+        
+        if([title isEqualToString:@"Save"])
+        {
+            NSString *name = [alertView textFieldAtIndex:0].text;
+            
+            DebugLog(@"name was input %@", name);
+            
+            [[NSUserDefaults standardUserDefaults] setObject:name forKey:kMMDataStoreControllerUserGreetingNameKey];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+
     }
 }
 
@@ -107,9 +144,9 @@
         NSString *mantra = [tableView cellForRowAtIndexPath:indexPath].textLabel.text;
         [MMDataStoreController removeMantra:mantra];
         
-        
-        [tableView deleteRowsAtIndexPaths:@[indexPath]
-                         withRowAnimation:UITableViewRowAnimationFade];
+        [tableView reloadData];
+//        [tableView deleteRowsAtIndexPaths:@[indexPath]
+//                         withRowAnimation:UITableViewRowAnimationFade];
         
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
@@ -117,6 +154,24 @@
         // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
         
     }   
+}
+
+
+#pragma mark - Internal
+
+- (void)showRandomMantra
+{
+    if ([MMDataStoreController allMantras].count > 0)
+    {
+        NSString *title = [NSString stringWithFormat:@"Hey %@,", [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey]];
+                           
+        [[[UIAlertView alloc] initWithTitle:title
+                                    message:[MMDataStoreController randomNonRepeatingMantra]
+                                   delegate:nil
+                          cancelButtonTitle:@"Thank You"
+                          otherButtonTitles:nil, nil]
+         show];
+    }
 }
 
 

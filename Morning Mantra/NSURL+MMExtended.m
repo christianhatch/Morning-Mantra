@@ -7,6 +7,7 @@
 //
 
 #import "NSURL+MMExtended.h"
+#import "MMConstants.h"
 
 @implementation NSURL (MMExtended)
 
@@ -28,7 +29,7 @@
         
         if (error)
         {
-            NSLog(@"error creating directory %@", error);
+            DebugLog(@"error creating directory %@", error);
         }
     }
     

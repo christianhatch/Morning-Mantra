@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>AE80C2EF-1017-42E0-92B1-3B81309F814B</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Morning Mantra</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>54E824FF-5FB0-4A17-ACC9-8C98674528E4</key>
+		<string>https://github.com/christianhatch/Morning-Mantra.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Morning Mantra.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>54E824FF-5FB0-4A17-ACC9-8C98674528E4</key>
+		<string>..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/christianhatch/Morning-Mantra.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>54E824FF-5FB0-4A17-ACC9-8C98674528E4</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>54E824FF-5FB0-4A17-ACC9-8C98674528E4</string>
+			<key>IDESourceControlWCCName</key>
+			<string>Morning Mantra</string>
+		</dict>
+	</array>
+</dict>
+</plist>

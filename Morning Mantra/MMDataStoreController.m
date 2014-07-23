@@ -8,22 +8,26 @@
 
 #import "MMDataStoreController.h"
 #import "NSURL+MMExtended.h"
+#import "MMConstants.h"
 
 #define kMMDataStoreControllerUsedMantrasURL   [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"unusedMantras" extension:nil]
 #define kMMDataStoreControllerUnUsedMantrasURL [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"usedMantras" extension:nil]
 #define kMMDataStoreControllerAllMantrasURL    [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"allMantras" extension:nil]
 
 
+NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDataStoreControllerUserGreetingNameKey"; 
+
+
 @interface MMDataStoreController ()
-
-///An array of fresh, not previously displayed Mantras.
-@property (nonatomic, strong) NSMutableArray *unUsedMantras;
-
-///An array of old, used, already displayed Mantras.
-@property (nonatomic, strong) NSMutableArray *usedMantras;
 
 //An array of all the Mantras, in the order the user entered them.
 @property (nonatomic, strong) NSMutableArray *allMantras;
+
+///An array of fresh, not previously displayed Mantras.
+@property (nonatomic, strong) NSMutableArray *freshMantras;
+
+///An array of old, used, already displayed Mantras.
+@property (nonatomic, strong) NSMutableArray *usedMantras;
 
 @end
 
@@ -45,18 +49,32 @@
 
 #pragma mark - Public API
 
+
 + (NSArray *)allMantras
 {
-    return [MMDataStoreController sharedController].allMantras;
+    NSArray *all = [MMDataStoreController sharedController].allMantras;
+    
+    DebugLog(@"All Mantras: %@", all);
+
+    return all;
 }
 
 + (NSString *)randomNonRepeatingMantra
 {
-    NSInteger index = [[MMDataStoreController sharedController] randomIndex];
-    NSString *mantra = [MMDataStoreController sharedController].unUsedMantras[index];
+    if ([MMDataStoreController sharedController].allMantras.count == 0 || [MMDataStoreController sharedController].freshMantras.count == 0)
+    {
+        DebugLog(@"Arrays are empty. Returning nil for random. %@", @"");
+        
+        return nil;
+    }
     
-    [[MMDataStoreController sharedController].unUsedMantras removeObjectAtIndex:index];
-    [[MMDataStoreController sharedController].usedMantras addObject:mantra];
+    NSInteger index = [[MMDataStoreController sharedController] randomValidIndex];
+    NSString *mantra = [MMDataStoreController sharedController].freshMantras[index];
+    
+    DebugLog(@"Random Mantra: %@", mantra);
+
+    [[MMDataStoreController sharedController].freshMantras removeObjectAtIndex:index];
+    [[MMDataStoreController sharedController].freshMantras addObject:mantra];
     
     [[MMDataStoreController sharedController] persistAllData];
     
@@ -67,14 +85,18 @@
 {
     if (mantra && mantra.length > 0)
     {
+        DebugLog(@"Adding Mantra: %@", mantra);
+
         [[MMDataStoreController sharedController].allMantras addObject:mantra];
         
-        if (![[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        if (![[MMDataStoreController sharedController].freshMantras containsObject:mantra])
         {
-            [[MMDataStoreController sharedController].unUsedMantras addObject:mantra];
+            [[MMDataStoreController sharedController].freshMantras addObject:mantra];
         }
         
-        [[MMDataStoreController sharedController] persistAllData];
+        BOOL success = [[MMDataStoreController sharedController] persistAllData];
+        
+        DebugLog(@"Added Mantra %@: Success=%i", mantra, success);
     }
 }
 
@@ -82,80 +104,95 @@
 {
     if (mantra && mantra.length > 0)
     {
+        DebugLog(@"Removing Mantra: %@", mantra);
+
         [[MMDataStoreController sharedController].allMantras removeObject:mantra];
         
-        if ([[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        if ([[MMDataStoreController sharedController].freshMantras containsObject:mantra])
         {
-            [[MMDataStoreController sharedController].unUsedMantras removeObject:mantra];
+            [[MMDataStoreController sharedController].freshMantras removeObject:mantra];
         }
         
-        if ([[MMDataStoreController sharedController].usedMantras containsObject:mantra])
+        if ([[MMDataStoreController sharedController].freshMantras containsObject:mantra])
         {
-            [[MMDataStoreController sharedController].usedMantras removeObject:mantra];
+            [[MMDataStoreController sharedController].freshMantras removeObject:mantra];
         }
         
-        [[MMDataStoreController sharedController] persistAllData];
+        BOOL success = [[MMDataStoreController sharedController] persistAllData];
+        
+        DebugLog(@"Removed Mantra %@: Success=%i", mantra, success);
     }
 }
 
 #pragma mark - Internal
 
-- (NSInteger)randomIndex
+- (NSInteger)randomValidIndex
 {
     NSInteger rando = 0;
-    int limit = (int)self.unUsedMantras.count;
     
-    if (self.unUsedMantras.count > 1)
-    {
-        rando = arc4random_uniform(limit);
-    }
-    else if (self.unUsedMantras.count == 1)
+    if (self.freshMantras.count == 1)
     {
         rando = 0;
     }
-    else
+    else if (self.freshMantras.count > 1)
     {
-        [self reFillUnusedMantras];
+        int limit = (int)self.freshMantras.count;
+        rando = arc4random_uniform(limit);
     }
     
+    DebugLog(@"Random Index: %li", rando);
+
     return rando;
 }
 
 - (void)reFillUnusedMantras
 {
-    [self.unUsedMantras addObjectsFromArray:self.usedMantras];
+    DebugLog(@"Refilling Unused from Used: %@", self.freshMantras);
+
+    [self.freshMantras addObjectsFromArray:self.freshMantras];
     
-    [self.usedMantras removeAllObjects];
+    [self.freshMantras removeAllObjects];
     
     [self persistAllData];
 }
 
-- (void)persistAllData
+- (BOOL)persistAllData
 {
-    [self.usedMantras writeToURL:kMMDataStoreControllerUsedMantrasURL
-                      atomically:YES];
+    BOOL used = [self.freshMantras writeToURL:kMMDataStoreControllerUsedMantrasURL
+                                  atomically:YES];
     
-    [self.unUsedMantras writeToURL:kMMDataStoreControllerUnUsedMantrasURL
-                        atomically:YES];
+    BOOL unUsed = [self.freshMantras writeToURL:kMMDataStoreControllerUnUsedMantrasURL
+                                      atomically:YES];
     
-    [self.allMantras writeToURL:kMMDataStoreControllerAllMantrasURL
-                     atomically:YES];
+    BOOL all = [self.allMantras writeToURL:kMMDataStoreControllerAllMantrasURL
+                                atomically:YES];
+    
+    BOOL aggregate = (used && unUsed && all);
+    
+    DebugLog(@"Persisted Used Data: %i", used);
+    DebugLog(@"Persisted UnUsed Data: %i", unUsed);
+    DebugLog(@"Persisted All Data: %i", all);
+
+    DebugLog(@"Persisted Aggregate Data: %i", aggregate);
+
+    return aggregate;
 }
 
 
 #pragma mark - Getters
 
-- (NSMutableArray *)unUsedMantras
+- (NSMutableArray *)freshMantras
 {
-    if (!_unUsedMantras)
+    if (!_freshMantras)
     {
-        _unUsedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUnUsedMantrasURL];
-        if (_unUsedMantras.count == 0)
+        _freshMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUnUsedMantrasURL];
+        
+        if (_freshMantras.count == 0 || _freshMantras == nil)
         {
-            _unUsedMantras = [[NSMutableArray alloc] initWithArray:[MMDataStoreController sharedController].allMantras copyItems:YES];
+            _freshMantras = [[NSMutableArray alloc] initWithArray:[MMDataStoreController sharedController].allMantras copyItems:YES];
         }
     }
-    return _unUsedMantras;
+    return _freshMantras;
 }
 
 - (NSMutableArray *)usedMantras
@@ -163,6 +200,11 @@
     if (!_usedMantras)
     {
         _usedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUsedMantrasURL];
+        
+        if (_usedMantras.count == 0 || _usedMantras == nil)
+        {
+            _usedMantras = [NSMutableArray arrayWithArray:@[]];
+        }
     }
     return _usedMantras;
 }
@@ -171,8 +213,13 @@
 {
     if (!_allMantras)
     {
-//        _allMantras =  [NSMutableArray arrayWithArray:@[@"Life is a marathon, not a sprint!", @"Have a mantra!", @"Be awesome!"]];
         _allMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerAllMantrasURL];
+        
+        if (_allMantras.count == 0 || _allMantras == nil)
+        {
+            _allMantras = [[NSMutableArray alloc] initWithArray:@[@"Life is a marathon, not a sprint."] copyItems:YES];
+        }
+
     }
     return _allMantras;
 }
