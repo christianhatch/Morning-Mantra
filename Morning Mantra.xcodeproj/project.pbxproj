@@ -9,10 +9,16 @@
 /* Begin PBXBuildFile section */
 		45217DFB197F7A2A00A4ECA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217DFA197F7A2A00A4ECA2 /* main.m */; };
 		45217DFE197F7A2A00A4ECA2 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */; };
-		45217E01197F7A2A00A4ECA2 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217E00197F7A2A00A4ECA2 /* ViewController.m */; };
 		45217E04197F7A2A00A4ECA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45217E02197F7A2A00A4ECA2 /* Main.storyboard */; };
 		45217E06197F7A2A00A4ECA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45217E05197F7A2A00A4ECA2 /* Images.xcassets */; };
 		45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */; };
+		45F33E1C197F7FEB003542CF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F33E1B197F7FEB003542CF /* Crashlytics.framework */; };
+		45F33E23197F82FD003542CF /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E22197F82FD003542CF /* MMTableViewController.m */; };
+		45F33E24197F82FD003542CF /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E22197F82FD003542CF /* MMTableViewController.m */; };
+		45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E2E197F8392003542CF /* MMDataStoreController.m */; };
+		45F33E30197F8392003542CF /* MMDataStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E2E197F8392003542CF /* MMDataStoreController.m */; };
+		45F33E33197F883E003542CF /* NSURL+MMExtended.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E32197F883E003542CF /* NSURL+MMExtended.m */; };
+		45F33E34197F883E003542CF /* NSURL+MMExtended.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E32197F883E003542CF /* NSURL+MMExtended.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -31,13 +37,18 @@
 		45217DFA197F7A2A00A4ECA2 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		45217DFF197F7A2A00A4ECA2 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		45217E00197F7A2A00A4ECA2 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
 		45217E03197F7A2A00A4ECA2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		45217E05197F7A2A00A4ECA2 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		45217E0B197F7A2B00A4ECA2 /* Morning MantraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Morning MantraTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45217E10197F7A2B00A4ECA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Morning_MantraTests.m; sourceTree = "<group>"; };
+		45F33E1B197F7FEB003542CF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
+		45F33E21197F82FD003542CF /* MMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewController.h; sourceTree = "<group>"; };
+		45F33E22197F82FD003542CF /* MMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewController.m; sourceTree = "<group>"; };
+		45F33E2D197F8392003542CF /* MMDataStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDataStoreController.h; sourceTree = "<group>"; };
+		45F33E2E197F8392003542CF /* MMDataStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDataStoreController.m; sourceTree = "<group>"; };
+		45F33E31197F883E003542CF /* NSURL+MMExtended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MMExtended.h"; sourceTree = "<group>"; };
+		45F33E32197F883E003542CF /* NSURL+MMExtended.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSURL+MMExtended.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -45,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F33E1C197F7FEB003542CF /* Crashlytics.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -79,11 +91,15 @@
 		45217DF7197F7A2A00A4ECA2 /* Morning Mantra */ = {
 			isa = PBXGroup;
 			children = (
+				45F33E31197F883E003542CF /* NSURL+MMExtended.h */,
+				45F33E32197F883E003542CF /* NSURL+MMExtended.m */,
 				45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */,
 				45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */,
-				45217DFF197F7A2A00A4ECA2 /* ViewController.h */,
-				45217E00197F7A2A00A4ECA2 /* ViewController.m */,
 				45217E02197F7A2A00A4ECA2 /* Main.storyboard */,
+				45F33E21197F82FD003542CF /* MMTableViewController.h */,
+				45F33E22197F82FD003542CF /* MMTableViewController.m */,
+				45F33E2D197F8392003542CF /* MMDataStoreController.h */,
+				45F33E2E197F8392003542CF /* MMDataStoreController.m */,
 				45217E05197F7A2A00A4ECA2 /* Images.xcassets */,
 				45217DF8197F7A2A00A4ECA2 /* Supporting Files */,
 			);
@@ -93,6 +109,7 @@
 		45217DF8197F7A2A00A4ECA2 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				45F33E1B197F7FEB003542CF /* Crashlytics.framework */,
 				45217DF9197F7A2A00A4ECA2 /* Info.plist */,
 				45217DFA197F7A2A00A4ECA2 /* main.m */,
 			);
@@ -126,6 +143,7 @@
 				45217DF1197F7A2A00A4ECA2 /* Sources */,
 				45217DF2197F7A2A00A4ECA2 /* Frameworks */,
 				45217DF3197F7A2A00A4ECA2 /* Resources */,
+				45F33E1A197F7FD1003542CF /* Install Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -165,6 +183,7 @@
 				TargetAttributes = {
 					45217DF4197F7A2A00A4ECA2 = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = YWKER65N63;
 					};
 					45217E0A197F7A2B00A4ECA2 = {
 						CreatedOnToolsVersion = 6.0;
@@ -210,14 +229,33 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		45F33E1A197F7FD1003542CF /* Install Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Install Crashlytics";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run 36aebc5d6093c8a7cc64fae3d769bf41933d7919 216458b4f171c912dd83c54e976d100f7fe247d329693e1b32de3c10e1740bb1";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		45217DF1197F7A2A00A4ECA2 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45217E01197F7A2A00A4ECA2 /* ViewController.m in Sources */,
+				45F33E23197F82FD003542CF /* MMTableViewController.m in Sources */,
+				45F33E33197F883E003542CF /* NSURL+MMExtended.m in Sources */,
 				45217DFE197F7A2A00A4ECA2 /* AppDelegate.m in Sources */,
 				45217DFB197F7A2A00A4ECA2 /* main.m in Sources */,
+				45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -226,6 +264,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */,
+				45F33E24197F82FD003542CF /* MMTableViewController.m in Sources */,
+				45F33E30197F8392003542CF /* MMDataStoreController.m in Sources */,
+				45F33E34197F883E003542CF /* NSURL+MMExtended.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -334,7 +375,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Morning Mantra/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -345,7 +392,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = "Morning Mantra/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -364,6 +417,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Morning MantraTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -379,6 +433,7 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Morning MantraTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TEST_HOST = "$(BUNDLE_LOADER)";
@@ -404,6 +459,7 @@
 				45217E17197F7A2B00A4ECA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45217E18197F7A2B00A4ECA2 /* Build configuration list for PBXNativeTarget "Morning MantraTests" */ = {
 			isa = XCConfigurationList;
@@ -412,6 +468,7 @@
 				45217E1A197F7A2B00A4ECA2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
