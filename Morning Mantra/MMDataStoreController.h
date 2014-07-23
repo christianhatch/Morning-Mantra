@@ -10,7 +10,10 @@
 
 @interface MMDataStoreController : NSObject
 
-+ (NSString *)randomMantra;
++ (NSArray *)allMantras;
+
++ (NSString *)randomNonRepeatingMantra;
+
 
 + (void)addMantra:(NSString *)mantra;
 

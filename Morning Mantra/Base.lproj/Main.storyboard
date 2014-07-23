@@ -8,7 +8,7 @@
         <scene sceneID="Dd5-QL-rhi">
             <objects>
                 <tableViewController storyboardIdentifier="MMTableViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1KG-Sa-3a9" customClass="MMTableViewController" sceneMemberID="viewController">
-                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" id="Kf0-7s-JtW">
+                    <tableView key="view" opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" allowsSelection="NO" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Kf0-7s-JtW">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -20,7 +20,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="59"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Life is a marathon, not a sprint." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bg0-7T-PEs">
+                                        <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bg0-7T-PEs">
                                             <rect key="frame" x="15" y="0.0" width="290" height="59"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="18"/>
@@ -37,7 +37,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Morning Mantra" id="xrw-hq-WVO">
-                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="O04-vZ-TRW"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="O04-vZ-TRW">
+                            <connections>
+                                <action selector="addMantraButtonTapped:" destination="1KG-Sa-3a9" id="jFD-xM-Ux0"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NI0-ou-zQI" userLabel="First Responder" sceneMemberID="firstResponder"/>

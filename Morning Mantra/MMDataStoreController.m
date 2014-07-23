@@ -11,6 +11,8 @@
 
 #define kMMDataStoreControllerUsedMantrasURL   [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"unusedMantras" extension:nil]
 #define kMMDataStoreControllerUnUsedMantrasURL [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"usedMantras" extension:nil]
+#define kMMDataStoreControllerAllMantrasURL    [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"allMantras" extension:nil]
+
 
 @interface MMDataStoreController ()
 
@@ -19,6 +21,9 @@
 
 ///An array of old, used, already displayed Mantras.
 @property (nonatomic, strong) NSMutableArray *usedMantras;
+
+//An array of all the Mantras, in the order the user entered them.
+@property (nonatomic, strong) NSMutableArray *allMantras;
 
 @end
 
@@ -40,14 +45,17 @@
 
 #pragma mark - Public API
 
-+ (NSString *)randomMantra
++ (NSArray *)allMantras
+{
+    return [MMDataStoreController sharedController].allMantras;
+}
+
++ (NSString *)randomNonRepeatingMantra
 {
     NSInteger index = [[MMDataStoreController sharedController] randomIndex];
-    
     NSString *mantra = [MMDataStoreController sharedController].unUsedMantras[index];
     
     [[MMDataStoreController sharedController].unUsedMantras removeObjectAtIndex:index];
-    
     [[MMDataStoreController sharedController].usedMantras addObject:mantra];
     
     [[MMDataStoreController sharedController] persistAllData];
@@ -59,7 +67,13 @@
 {
     if (mantra && mantra.length > 0)
     {
-        [[MMDataStoreController sharedController].unUsedMantras addObject:mantra];
+        [[MMDataStoreController sharedController].allMantras addObject:mantra];
+        
+        if (![[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        {
+            [[MMDataStoreController sharedController].unUsedMantras addObject:mantra];
+        }
+        
         [[MMDataStoreController sharedController] persistAllData];
     }
 }
@@ -68,7 +82,18 @@
 {
     if (mantra && mantra.length > 0)
     {
-        [[MMDataStoreController sharedController].unUsedMantras addObject:mantra];
+        [[MMDataStoreController sharedController].allMantras removeObject:mantra];
+        
+        if ([[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        {
+            [[MMDataStoreController sharedController].unUsedMantras removeObject:mantra];
+        }
+        
+        if ([[MMDataStoreController sharedController].usedMantras containsObject:mantra])
+        {
+            [[MMDataStoreController sharedController].usedMantras removeObject:mantra];
+        }
+        
         [[MMDataStoreController sharedController] persistAllData];
     }
 }
@@ -83,6 +108,10 @@
     if (self.unUsedMantras.count > 1)
     {
         rando = arc4random_uniform(limit);
+    }
+    else if (self.unUsedMantras.count == 1)
+    {
+        rando = 0;
     }
     else
     {
@@ -108,6 +137,9 @@
     
     [self.unUsedMantras writeToURL:kMMDataStoreControllerUnUsedMantrasURL
                         atomically:YES];
+    
+    [self.allMantras writeToURL:kMMDataStoreControllerAllMantrasURL
+                     atomically:YES];
 }
 
 
@@ -118,6 +150,10 @@
     if (!_unUsedMantras)
     {
         _unUsedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUnUsedMantrasURL];
+        if (_unUsedMantras.count == 0)
+        {
+            _unUsedMantras = [[NSMutableArray alloc] initWithArray:[MMDataStoreController sharedController].allMantras copyItems:YES];
+        }
     }
     return _unUsedMantras;
 }
@@ -129,6 +165,16 @@
         _usedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUsedMantrasURL];
     }
     return _usedMantras;
+}
+
+- (NSMutableArray *)allMantras
+{
+    if (!_allMantras)
+    {
+//        _allMantras =  [NSMutableArray arrayWithArray:@[@"Life is a marathon, not a sprint!", @"Have a mantra!", @"Be awesome!"]];
+        _allMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerAllMantrasURL];
+    }
+    return _allMantras;
 }
 
 
