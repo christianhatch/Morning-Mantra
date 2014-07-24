@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
 #import "MMDataStoreController.h"
+#import "MMConstants.h"
 
 @interface AppDelegate ()
 
@@ -18,45 +19,12 @@
             
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{
-//    [self scheduleLocalNotifications];
-    
+{    
     self.window.tintColor = [UIColor purpleColor];
 
-    [Crashlytics startWithAPIKey:@"36aebc5d6093c8a7cc64fae3d769bf41933d7919"];
+    [Crashlytics startWithAPIKey:kMMCrashlyticsID];
     
     return YES;
-}
-
-- (void)scheduleLocalNotifications
-{
-    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
-    NSString *mantra = [MMDataStoreController randomNonRepeatingMantra];
-    
-    
-//    NSCalendar *calendar = [NSCalendar currentCalendar];
-//    NSDateComponents *components = [[NSDateComponents alloc] init];
-//    [components setDay: 3];
-//    [components setMonth: 7];
-//    [components setYear: 2012];
-//    [components setHour:8];
-//    [components setMinute:0];
-//    [components setSecond:0];
-//    [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
-//    NSDate *dateToFire = [calendar dateFromComponents:components];
-
-    
-    
-    UILocalNotification *localNote = [[UILocalNotification alloc] init];
-    
-    localNote.repeatInterval = NSCalendarUnitDay;
-    localNote.timeZone = [NSTimeZone defaultTimeZone];
-    localNote.fireDate = [NSDate dateWithTimeIntervalSinceNow:120];
-    
-    localNote.alertBody = [NSString stringWithFormat:@"Hey %@, %@", userName, mantra];
-    localNote.alertAction = mantra;
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application {

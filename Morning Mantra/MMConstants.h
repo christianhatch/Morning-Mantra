@@ -6,6 +6,12 @@
 //  Copyright (c) 2014 Knot Labs. All rights reserved.
 //
 
+#import <Foundation/Foundation.h>
+
+extern NSString *const kMMCrashlyticsID;
+
+
+
 
 #pragma mark - Macros
 

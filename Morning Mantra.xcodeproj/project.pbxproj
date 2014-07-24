@@ -12,6 +12,7 @@
 		45217E04197F7A2A00A4ECA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45217E02197F7A2A00A4ECA2 /* Main.storyboard */; };
 		45217E06197F7A2A00A4ECA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45217E05197F7A2A00A4ECA2 /* Images.xcassets */; };
 		45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */; };
+		45CF8D99198098F800F248BB /* MMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CF8D98198098F800F248BB /* MMTableViewCell.m */; };
 		45F33E1C197F7FEB003542CF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F33E1B197F7FEB003542CF /* Crashlytics.framework */; };
 		45F33E23197F82FD003542CF /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E22197F82FD003542CF /* MMTableViewController.m */; };
 		45F33E24197F82FD003542CF /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E22197F82FD003542CF /* MMTableViewController.m */; };
@@ -45,6 +46,8 @@
 		45217E0B197F7A2B00A4ECA2 /* Morning MantraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Morning MantraTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45217E10197F7A2B00A4ECA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Morning_MantraTests.m; sourceTree = "<group>"; };
+		45CF8D97198098F800F248BB /* MMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewCell.h; sourceTree = "<group>"; };
+		45CF8D98198098F800F248BB /* MMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewCell.m; sourceTree = "<group>"; };
 		45F33E1B197F7FEB003542CF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 		45F33E21197F82FD003542CF /* MMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewController.h; sourceTree = "<group>"; };
 		45F33E22197F82FD003542CF /* MMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewController.m; sourceTree = "<group>"; };
@@ -77,6 +80,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		451A07921980B4AC00B4570C /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				45F33E35197F9B9D003542CF /* MMConstants.h */,
+				45F33E36197F9B9D003542CF /* MMConstants.m */,
+				45F33E31197F883E003542CF /* NSURL+MMExtended.h */,
+				45F33E32197F883E003542CF /* NSURL+MMExtended.m */,
+			);
+			name = Core;
+			sourceTree = "<group>";
+		};
 		45217DEC197F7A2A00A4ECA2 = {
 			isa = PBXGroup;
 			children = (
@@ -100,13 +114,12 @@
 		45217DF7197F7A2A00A4ECA2 /* Morning Mantra */ = {
 			isa = PBXGroup;
 			children = (
-				45F33E35197F9B9D003542CF /* MMConstants.h */,
-				45F33E36197F9B9D003542CF /* MMConstants.m */,
-				45F33E31197F883E003542CF /* NSURL+MMExtended.h */,
-				45F33E32197F883E003542CF /* NSURL+MMExtended.m */,
+				451A07921980B4AC00B4570C /* Core */,
 				45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */,
 				45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */,
 				45217E02197F7A2A00A4ECA2 /* Main.storyboard */,
+				45CF8D97198098F800F248BB /* MMTableViewCell.h */,
+				45CF8D98198098F800F248BB /* MMTableViewCell.m */,
 				45F33E21197F82FD003542CF /* MMTableViewController.h */,
 				45F33E22197F82FD003542CF /* MMTableViewController.m */,
 				45F33E2D197F8392003542CF /* MMDataStoreController.h */,
@@ -308,6 +321,7 @@
 				45217DFB197F7A2A00A4ECA2 /* main.m in Sources */,
 				45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */,
 				45F33E37197F9B9D003542CF /* MMConstants.m in Sources */,
+				45CF8D99198098F800F248BB /* MMTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

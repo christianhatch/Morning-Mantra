@@ -22,4 +22,7 @@ extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
 
 + (void)removeMantra:(NSString *)mantra;
 
+
++ (void)scheduleLocalNotifications;
+
 @end

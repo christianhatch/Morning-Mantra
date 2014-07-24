@@ -9,6 +9,7 @@
 #import "MMDataStoreController.h"
 #import "NSURL+MMExtended.h"
 #import "MMConstants.h"
+#import <UIKit/UIKit.h>
 
 #define kMMDataStoreControllerUsedMantrasURL   [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"unusedMantras" extension:nil]
 #define kMMDataStoreControllerUnUsedMantrasURL [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"usedMantras" extension:nil]
@@ -54,7 +55,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     NSArray *all = [MMDataStoreController sharedController].allMantras;
     
-    DebugLog(@"All Mantras: %@", all);
+//    DebugLog(@"All Mantras: %@", all);
 
     return all;
 }
@@ -63,7 +64,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     if ([MMDataStoreController sharedController].allMantras.count == 0 || [MMDataStoreController sharedController].freshMantras.count == 0)
     {
-        DebugLog(@"Arrays are empty. Returning nil for random. %@", @"");
+//        DebugLog(@"Arrays are empty. Returning nil for random. %@", @"");
         
         return nil;
     }
@@ -71,7 +72,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     NSInteger index = [[MMDataStoreController sharedController] randomValidIndex];
     NSString *mantra = [MMDataStoreController sharedController].freshMantras[index];
     
-    DebugLog(@"Random Mantra: %@", mantra);
+//    DebugLog(@"Random Mantra: %@", mantra);
 
     [[MMDataStoreController sharedController].freshMantras removeObjectAtIndex:index];
     [[MMDataStoreController sharedController].freshMantras addObject:mantra];
@@ -85,7 +86,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     if (mantra && mantra.length > 0)
     {
-        DebugLog(@"Adding Mantra: %@", mantra);
+//        DebugLog(@"Adding Mantra: %@", mantra);
 
         [[MMDataStoreController sharedController].allMantras addObject:mantra];
         
@@ -94,9 +95,10 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
             [[MMDataStoreController sharedController].freshMantras addObject:mantra];
         }
         
-        BOOL success = [[MMDataStoreController sharedController] persistAllData];
+//        BOOL success =
+        [[MMDataStoreController sharedController] persistAllData];
         
-        DebugLog(@"Added Mantra %@: Success=%i", mantra, success);
+//        DebugLog(@"Added Mantra %@: Success=%i", mantra, success);
     }
 }
 
@@ -104,7 +106,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     if (mantra && mantra.length > 0)
     {
-        DebugLog(@"Removing Mantra: %@", mantra);
+//        DebugLog(@"Removing Mantra: %@", mantra);
 
         [[MMDataStoreController sharedController].allMantras removeObject:mantra];
         
@@ -118,10 +120,39 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
             [[MMDataStoreController sharedController].freshMantras removeObject:mantra];
         }
         
-        BOOL success = [[MMDataStoreController sharedController] persistAllData];
+//        BOOL success =
+        [[MMDataStoreController sharedController] persistAllData];
         
-        DebugLog(@"Removed Mantra %@: Success=%i", mantra, success);
+//        DebugLog(@"Removed Mantra %@: Success=%i", mantra, success);
     }
+}
+
++ (void)scheduleLocalNotifications
+{
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
+    NSString *mantra = [MMDataStoreController randomNonRepeatingMantra];
+    
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setHour:8];
+    [components setMinute:0];
+    [components setSecond:0];
+    [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
+    NSDate *dateToFire = [calendar dateFromComponents:components];
+    
+    
+    
+    UILocalNotification *localNote = [[UILocalNotification alloc] init];
+
+    localNote.repeatInterval = NSCalendarUnitDay;
+    localNote.timeZone = [NSTimeZone defaultTimeZone];
+    localNote.fireDate = dateToFire;
+    
+    localNote.alertBody = [NSString stringWithFormat:@"Hey %@, %@", userName, mantra];
+    localNote.alertAction = mantra;
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
 }
 
 #pragma mark - Internal
@@ -140,7 +171,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
         rando = arc4random_uniform(limit);
     }
     
-    DebugLog(@"Random Index: %li", rando);
+//    DebugLog(@"Random Index: %li", rando);
 
     return rando;
 }
@@ -169,11 +200,11 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     
     BOOL aggregate = (used && unUsed && all);
     
-    DebugLog(@"Persisted Used Data: %i", used);
-    DebugLog(@"Persisted UnUsed Data: %i", unUsed);
-    DebugLog(@"Persisted All Data: %i", all);
-
-    DebugLog(@"Persisted Aggregate Data: %i", aggregate);
+//    DebugLog(@"Persisted Used Data: %i", used);
+//    DebugLog(@"Persisted UnUsed Data: %i", unUsed);
+//    DebugLog(@"Persisted All Data: %i", all);
+//
+//    DebugLog(@"Persisted Aggregate Data: %i", aggregate);
 
     return aggregate;
 }
