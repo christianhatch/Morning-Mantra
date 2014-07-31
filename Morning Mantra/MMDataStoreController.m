@@ -129,6 +129,8 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 + (void)scheduleLocalNotifications
 {
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
     NSString *mantra = [MMDataStoreController randomNonRepeatingMantra];
     
@@ -140,7 +142,6 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     [components setSecond:0];
     [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
     NSDate *dateToFire = [calendar dateFromComponents:components];
-    
     
     
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
