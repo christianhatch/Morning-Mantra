@@ -140,22 +140,22 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     }
     
     NSString *mantra = [MMDataStoreController randomNonRepeatingMantra];
-    
+
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setHour:8];
+    [components setHour:8]; 
     [components setMinute:0];
     [components setSecond:0];
     [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
     NSDate *dateToFire = [calendar dateFromComponents:components];
     
+    
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
-
     localNote.repeatInterval = NSCalendarUnitDay;
     localNote.timeZone = [NSTimeZone defaultTimeZone];
-    localNote.fireDate = dateToFire;
-    
+//    localNote.fireDate = dateToFire;
+    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
     localNote.alertBody = [NSString stringWithFormat:@"Hi %@, %@", userName, mantra];
     localNote.alertAction = mantra;
     

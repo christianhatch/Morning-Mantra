@@ -208,10 +208,13 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
         {
             NSString *name = [alertView textFieldAtIndex:0].text;
             
-            DebugLog(@"name was input %@", name);
-            
-            [[NSUserDefaults standardUserDefaults] setObject:name forKey:kMMDataStoreControllerUserGreetingNameKey];
-            [[NSUserDefaults standardUserDefaults] synchronize];
+            if (name && name.length > 0)
+            {
+                DebugLog(@"name was input %@", name);
+                
+                [[NSUserDefaults standardUserDefaults] setObject:name forKey:kMMDataStoreControllerUserGreetingNameKey];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
         }
     }
 }
