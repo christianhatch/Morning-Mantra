@@ -131,7 +131,14 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
+    
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
+    
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey])
+    {
+        userName = @"friend";
+    }
+    
     NSString *mantra = [MMDataStoreController randomNonRepeatingMantra];
     
     
@@ -143,14 +150,13 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
     NSDate *dateToFire = [calendar dateFromComponents:components];
     
-    
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
 
     localNote.repeatInterval = NSCalendarUnitDay;
     localNote.timeZone = [NSTimeZone defaultTimeZone];
     localNote.fireDate = dateToFire;
     
-    localNote.alertBody = [NSString stringWithFormat:@"Hey %@, %@", userName, mantra];
+    localNote.alertBody = [NSString stringWithFormat:@"Hi %@, %@", userName, mantra];
     localNote.alertAction = mantra;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
@@ -249,7 +255,12 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
         
         if (_allMantras.count == 0 || _allMantras == nil)
         {
-            _allMantras = [[NSMutableArray alloc] initWithArray:@[@"Life is a marathon, not a sprint."] copyItems:YES];
+            _allMantras = [[NSMutableArray alloc] initWithArray:@[@"Have a mantra.",
+                                                                  @"Life is a marathon, not a sprint.",
+                                                                  @"Everything is built in small steps.",
+                                                                  @"Write stuff down.",
+                                                                  @"A goal isn’t a goal unless you have to reach for it.",
+                                                                  ] copyItems:YES];
         }
 
     }

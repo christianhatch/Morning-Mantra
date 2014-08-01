@@ -31,12 +31,15 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
-                                                 name:UIContentSizeCategoryDidChangeNotification object:nil];
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
+    
+    [MMDataStoreController scheduleLocalNotifications];
     
     BOOL noGreetingNameSaved = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey] == nil;
     
@@ -209,10 +212,7 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
             
             [[NSUserDefaults standardUserDefaults] setObject:name forKey:kMMDataStoreControllerUserGreetingNameKey];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [MMDataStoreController scheduleLocalNotifications]; 
         }
-        
     }
 }
 
