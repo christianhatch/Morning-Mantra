@@ -154,8 +154,9 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
     localNote.repeatInterval = NSCalendarUnitDay;
     localNote.timeZone = [NSTimeZone defaultTimeZone];
-//    localNote.fireDate = dateToFire;
-    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
+    localNote.fireDate = dateToFire;
+    
+//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
     localNote.alertBody = [NSString stringWithFormat:@"Hi %@, %@", userName, mantra];
     localNote.alertAction = mantra;
     
