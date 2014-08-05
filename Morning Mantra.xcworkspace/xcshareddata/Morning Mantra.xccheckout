@@ -5,34 +5,34 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>AE80C2EF-1017-42E0-92B1-3B81309F814B</string>
+	<string>A84A861C-CA2C-45C0-A2B7-A25A2D284537</string>
 	<key>IDESourceControlProjectName</key>
 	<string>Morning Mantra</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
 	<dict>
-		<key>54E824FF-5FB0-4A17-ACC9-8C98674528E4</key>
-		<string>https://github.com/christianhatch/Morning-Mantra.git</string>
+		<key>5926993C-1525-4804-A7F2-41B9EFACD34E</key>
+		<string>https://bitbucket.org/knotlabs/morning-mantra.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Morning Mantra.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
-		<key>54E824FF-5FB0-4A17-ACC9-8C98674528E4</key>
+		<key>5926993C-1525-4804-A7F2-41B9EFACD34E</key>
 		<string>..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
-	<string>https://github.com/christianhatch/Morning-Mantra.git</string>
+	<string>https://bitbucket.org/knotlabs/morning-mantra.git</string>
 	<key>IDESourceControlProjectVersion</key>
 	<integer>110</integer>
 	<key>IDESourceControlProjectWCCIdentifier</key>
-	<string>54E824FF-5FB0-4A17-ACC9-8C98674528E4</string>
+	<string>5926993C-1525-4804-A7F2-41B9EFACD34E</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
 			<key>IDESourceControlWCCIdentifierKey</key>
-			<string>54E824FF-5FB0-4A17-ACC9-8C98674528E4</string>
+			<string>5926993C-1525-4804-A7F2-41B9EFACD34E</string>
 			<key>IDESourceControlWCCName</key>
 			<string>Morning Mantra</string>
 		</dict>
