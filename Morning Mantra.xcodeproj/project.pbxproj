@@ -11,6 +11,8 @@
 		45101B351994895C00FD59A3 /* TLSpringFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */; };
 		45101B38199493C900FD59A3 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B37199493C900FD59A3 /* MMCollectionViewCell.m */; };
 		45101B39199493C900FD59A3 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B37199493C900FD59A3 /* MMCollectionViewCell.m */; };
+		45101B3C1994A17300FD59A3 /* MMCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45101B3B1994A17300FD59A3 /* MMCollectionViewCell.xib */; };
+		45101B3D1994A17300FD59A3 /* MMCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45101B3B1994A17300FD59A3 /* MMCollectionViewCell.xib */; };
 		4519115C19947E8E00427450 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4519115B19947E8E00427450 /* MMViewController.m */; };
 		4519115D19947E8E00427450 /* MMViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4519115B19947E8E00427450 /* MMViewController.m */; };
 		45217DFB197F7A2A00A4ECA2 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217DFA197F7A2A00A4ECA2 /* main.m */; };
@@ -18,10 +20,7 @@
 		45217E04197F7A2A00A4ECA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45217E02197F7A2A00A4ECA2 /* Main.storyboard */; };
 		45217E06197F7A2A00A4ECA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45217E05197F7A2A00A4ECA2 /* Images.xcassets */; };
 		45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */; };
-		45CF8D99198098F800F248BB /* MMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45CF8D98198098F800F248BB /* MMTableViewCell.m */; };
 		45F33E1C197F7FEB003542CF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F33E1B197F7FEB003542CF /* Crashlytics.framework */; };
-		45F33E23197F82FD003542CF /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E22197F82FD003542CF /* MMTableViewController.m */; };
-		45F33E24197F82FD003542CF /* MMTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E22197F82FD003542CF /* MMTableViewController.m */; };
 		45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E2E197F8392003542CF /* MMDataStoreController.m */; };
 		45F33E30197F8392003542CF /* MMDataStoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E2E197F8392003542CF /* MMDataStoreController.m */; };
 		45F33E33197F883E003542CF /* NSURL+MMExtended.m in Sources */ = {isa = PBXBuildFile; fileRef = 45F33E32197F883E003542CF /* NSURL+MMExtended.m */; };
@@ -46,6 +45,7 @@
 		45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLSpringFlowLayout.m; sourceTree = "<group>"; };
 		45101B36199493C900FD59A3 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
 		45101B37199493C900FD59A3 /* MMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewCell.m; sourceTree = "<group>"; };
+		45101B3B1994A17300FD59A3 /* MMCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MMCollectionViewCell.xib; sourceTree = "<group>"; };
 		4519115A19947E8E00427450 /* MMViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMViewController.h; sourceTree = "<group>"; };
 		4519115B19947E8E00427450 /* MMViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMViewController.m; sourceTree = "<group>"; };
 		45217DF5197F7A2A00A4ECA2 /* Morning Mantra.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Morning Mantra.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -58,11 +58,7 @@
 		45217E0B197F7A2B00A4ECA2 /* Morning MantraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Morning MantraTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		45217E10197F7A2B00A4ECA2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Morning_MantraTests.m; sourceTree = "<group>"; };
-		45CF8D97198098F800F248BB /* MMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewCell.h; sourceTree = "<group>"; };
-		45CF8D98198098F800F248BB /* MMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewCell.m; sourceTree = "<group>"; };
 		45F33E1B197F7FEB003542CF /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
-		45F33E21197F82FD003542CF /* MMTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewController.h; sourceTree = "<group>"; };
-		45F33E22197F82FD003542CF /* MMTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewController.m; sourceTree = "<group>"; };
 		45F33E2D197F8392003542CF /* MMDataStoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMDataStoreController.h; sourceTree = "<group>"; };
 		45F33E2E197F8392003542CF /* MMDataStoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMDataStoreController.m; sourceTree = "<group>"; };
 		45F33E31197F883E003542CF /* NSURL+MMExtended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSURL+MMExtended.h"; sourceTree = "<group>"; };
@@ -92,6 +88,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45101B3A1994942A00FD59A3 /* Vendor */ = {
+			isa = PBXGroup;
+			children = (
+				45101B321994895C00FD59A3 /* TLSpringFlowLayout.h */,
+				45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */,
+			);
+			name = Vendor;
+			sourceTree = "<group>";
+		};
 		451A07921980B4AC00B4570C /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -127,21 +132,17 @@
 			isa = PBXGroup;
 			children = (
 				451A07921980B4AC00B4570C /* Core */,
+				45101B3A1994942A00FD59A3 /* Vendor */,
 				45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */,
 				45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */,
+				45F33E2D197F8392003542CF /* MMDataStoreController.h */,
+				45F33E2E197F8392003542CF /* MMDataStoreController.m */,
 				45217E02197F7A2A00A4ECA2 /* Main.storyboard */,
 				4519115A19947E8E00427450 /* MMViewController.h */,
 				4519115B19947E8E00427450 /* MMViewController.m */,
-				45101B321994895C00FD59A3 /* TLSpringFlowLayout.h */,
-				45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */,
 				45101B36199493C900FD59A3 /* MMCollectionViewCell.h */,
 				45101B37199493C900FD59A3 /* MMCollectionViewCell.m */,
-				45F33E2D197F8392003542CF /* MMDataStoreController.h */,
-				45F33E2E197F8392003542CF /* MMDataStoreController.m */,
-				45F33E21197F82FD003542CF /* MMTableViewController.h */,
-				45F33E22197F82FD003542CF /* MMTableViewController.m */,
-				45CF8D97198098F800F248BB /* MMTableViewCell.h */,
-				45CF8D98198098F800F248BB /* MMTableViewCell.m */,
+				45101B3B1994A17300FD59A3 /* MMCollectionViewCell.xib */,
 				45217E05197F7A2A00A4ECA2 /* Images.xcassets */,
 				45217DF8197F7A2A00A4ECA2 /* Supporting Files */,
 			);
@@ -269,6 +270,7 @@
 			files = (
 				45217E04197F7A2A00A4ECA2 /* Main.storyboard in Resources */,
 				45217E06197F7A2A00A4ECA2 /* Images.xcassets in Resources */,
+				45101B3C1994A17300FD59A3 /* MMCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -276,6 +278,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45101B3D1994A17300FD59A3 /* MMCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +336,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45F33E23197F82FD003542CF /* MMTableViewController.m in Sources */,
 				45F33E33197F883E003542CF /* NSURL+MMExtended.m in Sources */,
 				45101B38199493C900FD59A3 /* MMCollectionViewCell.m in Sources */,
 				45217DFE197F7A2A00A4ECA2 /* AppDelegate.m in Sources */,
@@ -342,7 +344,6 @@
 				45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */,
 				45F33E37197F9B9D003542CF /* MMConstants.m in Sources */,
 				4519115C19947E8E00427450 /* MMViewController.m in Sources */,
-				45CF8D99198098F800F248BB /* MMTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +354,6 @@
 				45101B351994895C00FD59A3 /* TLSpringFlowLayout.m in Sources */,
 				4519115D19947E8E00427450 /* MMViewController.m in Sources */,
 				45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */,
-				45F33E24197F82FD003542CF /* MMTableViewController.m in Sources */,
 				45101B39199493C900FD59A3 /* MMCollectionViewCell.m in Sources */,
 				45F33E30197F8392003542CF /* MMDataStoreController.m in Sources */,
 				45F33E34197F883E003542CF /* NSURL+MMExtended.m in Sources */,

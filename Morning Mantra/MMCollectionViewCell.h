@@ -11,4 +11,6 @@
 
 @interface MMCollectionViewCell : UICollectionViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *label;
+
 @end

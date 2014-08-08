@@ -73,7 +73,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
         return nil;
     }
     
-    NSInteger index = [[MMDataStoreController sharedController] randomValidIndex];
+    NSInteger index = [[MMDataStoreController sharedController] randomIndex];
     NSString *mantra = [MMDataStoreController sharedController].unUsedMantras[index];
     
 //    DebugLog(@"Random Mantra: %@", mantra);
@@ -85,6 +85,18 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     
     return mantra;
 }
+
++ (NSString *)randomMantraGreeting
+{
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey])
+    {
+        userName = @"friend";
+    }
+    
+    return [NSString stringWithFormat:@"Hi %@, %@", userName, [MMDataStoreController randomMantra]];
+}
+
 
 + (void)addMantra:(NSString *)mantra
 {
@@ -136,16 +148,6 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
     
-    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
-    
-    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey])
-    {
-        userName = @"friend";
-    }
-    
-    NSString *mantra = [MMDataStoreController randomMantra];
-
-    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setHour:8]; 
@@ -161,8 +163,8 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     localNote.fireDate = dateToFire;
     
 //    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
-    localNote.alertBody = [NSString stringWithFormat:@"Hi %@, %@", userName, mantra];
-    localNote.alertAction = mantra;
+    localNote.alertBody = [MMDataStoreController randomMantraGreeting];
+    localNote.alertAction = @"view";
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
 }
@@ -170,7 +172,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 #pragma mark - Internal
 
-- (NSInteger)randomValidIndex
+- (NSInteger)randomIndex
 {
     NSInteger rando = 0;
     

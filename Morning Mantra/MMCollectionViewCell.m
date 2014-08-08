@@ -8,24 +8,42 @@
 
 #import "MMCollectionViewCell.h"
 
+@interface MMCollectionViewCell ()
+@property (weak, nonatomic) IBOutlet UIButton *topRightButton;
+@end
+
 @implementation MMCollectionViewCell
 
-- (id)initWithFrame:(CGRect)frame
+static CGSize _extraMargins = {0,0};
+
+- (CGSize)intrinsicContentSize
 {
-    self = [super initWithFrame:frame];
-    if (self) {
-        // Initialization code
+    CGSize size = [self.label intrinsicContentSize];
+    
+    if (CGSizeEqualToSize(_extraMargins, CGSizeZero))
+    {
+        // quick and dirty: get extra margins from constraints
+        for (NSLayoutConstraint *constraint in self.constraints)
+        {
+            if (constraint.firstAttribute == NSLayoutAttributeBottom || constraint.firstAttribute == NSLayoutAttributeTop)
+            {
+                // vertical spacer
+                _extraMargins.height += [constraint constant];
+            }
+            else if (constraint.firstAttribute == NSLayoutAttributeLeading || constraint.firstAttribute == NSLayoutAttributeTrailing)
+            {
+                // horizontal spacer
+                _extraMargins.width += [constraint constant];
+            }
+        }
     }
-    return self;
+    
+    // add to intrinsic content size of label
+    size.width += _extraMargins.width;
+    size.height += _extraMargins.height;
+    
+    return size;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

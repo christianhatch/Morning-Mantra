@@ -8,8 +8,11 @@
 
 #import "MMViewController.h"
 #import "MMDataStoreController.h"
+#import "MMCollectionViewCell.h"
 
 @interface MMViewController ()
+
+@property (nonatomic, strong) MMCollectionViewCell *prototypeCell;
 
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
@@ -17,11 +20,23 @@
 
 @implementation MMViewController
 
-static NSString * CellIdentifier = @"cellIdentifier";
+static NSString * CellIdentifier = @"MMCollectionViewCell";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.navigationItem.prompt = [MMDataStoreController randomMantraGreeting];
+    
+    UINib *cellNib = [UINib nibWithNibName:@"MMCollectionViewCell" bundle:nil];
+    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"MMCollectionViewCell"];
+    
+    self.prototypeCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didChangePreferredContentSize:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -29,6 +44,8 @@ static NSString * CellIdentifier = @"cellIdentifier";
     [super viewDidAppear:animated];
     
     [MMDataStoreController scheduleLocalNotifications];
+    
+    [self.collectionView.collectionViewLayout invalidateLayout];
     
     if ([MMDataStoreController shouldPresentAddNameUI])
     {
@@ -53,19 +70,41 @@ static NSString * CellIdentifier = @"cellIdentifier";
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    UICollectionViewCell *otherCell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
+    MMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
                                                                                 forIndexPath:indexPath];
+    [self configureCell:cell forRowAtIndexPath:indexPath];
     
+    return cell;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
     
-    
-    
-    return otherCell;
+    return [self.prototypeCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
 }
 
 
 
 
+#pragma Mark - Internal
 
+- (void)configureCell:(UICollectionViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if ([cell isKindOfClass:[MMCollectionViewCell class]])
+    {
+        MMCollectionViewCell *textCell = (MMCollectionViewCell *)cell;
+        textCell.label.text = [MMDataStoreController allMantras][indexPath.row];
+        textCell.label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+    }
+}
+
+
+- (void)didChangePreferredContentSize:(NSNotification *)notification
+{
+    [self.collectionView.collectionViewLayout invalidateLayout];
+//    [self.collectionView reloadData];
+}
 
 
 

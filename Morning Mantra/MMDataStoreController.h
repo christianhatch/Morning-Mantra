@@ -16,8 +16,8 @@ extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
 
 + (NSArray *)allMantras;
 
-+ (NSString *)randomMantra;
-
+//+ (NSString *)randomMantra;
++ (NSString *)randomMantraGreeting;
 
 + (void)addMantra:(NSString *)mantra;
 
