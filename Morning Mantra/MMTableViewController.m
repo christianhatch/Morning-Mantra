@@ -17,6 +17,7 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
 @interface MMTableViewController () <UIAlertViewDelegate>
 
 - (IBAction)addMantraButtonTapped:(id)sender;
+
 @property (nonatomic, strong) MMTableViewCell *prototypeCell;
 
 @end
@@ -41,17 +42,17 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
     
     [MMDataStoreController scheduleLocalNotifications];
     
-    BOOL noGreetingNameSaved = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey] == nil;
-    
-    if (noGreetingNameSaved)
+    if ([MMDataStoreController shouldPresentAddNameUI])
     {
-        [self inputName];
+        [MMDataStoreController presentAddNameUIWithCompletion:nil];
     }
 }
 
 - (IBAction)addMantraButtonTapped:(id)sender
 {
-    [self addMantra];
+    [MMDataStoreController presentAddMantraUIWithCompletion:^{
+        [self.tableView reloadData];
+    }];
 }
 
 
@@ -149,7 +150,7 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
         NSString *title = [NSString stringWithFormat:@"Hey %@,", [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey]];
                            
         [[[UIAlertView alloc] initWithTitle:title
-                                    message:[MMDataStoreController randomNonRepeatingMantra]
+                                    message:[MMDataStoreController randomMantra]
                                    delegate:nil
                           cancelButtonTitle:@"Thank You"
                           otherButtonTitles:nil, nil]
@@ -157,67 +158,67 @@ static NSString *MMTableViewCellID = @"MMTableViewCell";
     }
 }
 
-- (void)addMantra
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Mantra"
-                                                    message:nil
-                                                   delegate:self
-                                          cancelButtonTitle:@"Cancel"
-                                          otherButtonTitles:@"Add Mantra", nil];
-    
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    alert.tag = 1;
-    [alert show];
-}
+//- (void)addMantra
+//{
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Mantra"
+//                                                    message:nil
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"Cancel"
+//                                          otherButtonTitles:@"Add Mantra", nil];
+//    
+//    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//    alert.tag = 1;
+//    [alert show];
+//}
 
-- (void)inputName
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What's your name?"
-                                                    message:@"Enter your name below to personalize your Morning Mantra"
-                                                   delegate:self
-                                          cancelButtonTitle:@"No Thanks"
-                                          otherButtonTitles:@"Save", nil];
-    
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    alert.tag = 2;
-    [alert show];
-}
+//- (void)inputName
+//{
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What's your name?"
+//                                                    message:@"Enter your name below to personalize your Morning Mantra"
+//                                                   delegate:self
+//                                          cancelButtonTitle:@"No Thanks"
+//                                          otherButtonTitles:@"Save", nil];
+//    
+//    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
+//    alert.tag = 2;
+//    [alert show];
+//}
 
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 1)
-    {
-        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-        
-        if([title isEqualToString:@"Add Mantra"])
-        {
-            NSString *mantra = [alertView textFieldAtIndex:0].text;
-            
-            DebugLog(@"new mantra to add %@", mantra);
-            
-            [MMDataStoreController addMantra:mantra];
-            [self.tableView reloadData];
-        }
-    }
-    else if (alertView.tag == 2)
-    {
-        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
-        
-        if([title isEqualToString:@"Save"])
-        {
-            NSString *name = [alertView textFieldAtIndex:0].text;
-            
-            if (name && name.length > 0)
-            {
-                DebugLog(@"name was input %@", name);
-                
-                [[NSUserDefaults standardUserDefaults] setObject:name forKey:kMMDataStoreControllerUserGreetingNameKey];
-                [[NSUserDefaults standardUserDefaults] synchronize];
-            }
-        }
-    }
-}
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (alertView.tag == 1)
+//    {
+//        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+//        
+//        if([title isEqualToString:@"Add Mantra"])
+//        {
+//            NSString *mantra = [alertView textFieldAtIndex:0].text;
+//            
+//            DebugLog(@"new mantra to add %@", mantra);
+//            
+//            [MMDataStoreController addMantra:mantra];
+//            [self.tableView reloadData];
+//        }
+//    }
+//    else if (alertView.tag == 2)
+//    {
+//        NSString *title = [alertView buttonTitleAtIndex:buttonIndex];
+//        
+//        if([title isEqualToString:@"Save"])
+//        {
+//            NSString *name = [alertView textFieldAtIndex:0].text;
+//            
+//            if (name && name.length > 0)
+//            {
+//                DebugLog(@"name was input %@", name);
+//                
+//                [[NSUserDefaults standardUserDefaults] setObject:name forKey:kMMDataStoreControllerUserGreetingNameKey];
+//                [[NSUserDefaults standardUserDefaults] synchronize];
+//            }
+//        }
+//    }
+//}
 
 #pragma mark - Getters
 

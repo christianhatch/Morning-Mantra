@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-UIAlertView-Blocks.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -37,32 +42,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>5D3CCA1E790645EC912F36CB</key>
+		<key>08D19950BBC6493EA0AA34D0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A67307D49C4F49999381AD3A</key>
+		<key>5C418055CC5247B59A0D2F37</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>DBA5E680390F4FC9A0952693</key>
+		<key>64AE52DCE24A46ADB0CB23BE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E46BB9BD798B4B939C4933C4</key>
+		<key>6EFC97A97BD24763BC1F4CC3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E95DBF7646B3479FAD4FFFE2</key>
+		<key>8F840511AA5F4FE2ABF8FB8A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FEE7E6E1F00548E8A4DC6114</key>
+		<key>CC990DC99F454BF7BA83ABD2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1852A4DCF554B6BAA84ED8D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

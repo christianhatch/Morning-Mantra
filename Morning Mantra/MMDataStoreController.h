@@ -6,7 +6,8 @@
 //  Copyright (c) 2014 Knot Labs. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
+@import Foundation;
+
 
 extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
 
@@ -15,7 +16,7 @@ extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
 
 + (NSArray *)allMantras;
 
-+ (NSString *)randomNonRepeatingMantra;
++ (NSString *)randomMantra;
 
 
 + (void)addMantra:(NSString *)mantra;
@@ -24,5 +25,18 @@ extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
 
 
 + (void)scheduleLocalNotifications;
+
+
+@end
+
+
+
+@interface MMDataStoreController (UIAdditions)
+
++ (void)presentAddMantraUIWithCompletion:(void(^)(void))completion;
+
++ (void)presentAddNameUIWithCompletion:(void(^)(void))completion;
+
++ (BOOL)shouldPresentAddNameUI;
 
 @end

@@ -8,3 +8,5 @@ pod 'Parse-iOS-SDK'
 pod 'pop'
 
 pod 'Tweaks'
+
+pod 'UIAlertView-Blocks'
