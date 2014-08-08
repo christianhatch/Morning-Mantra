@@ -131,8 +131,8 @@
 		45217DF7197F7A2A00A4ECA2 /* Morning Mantra */ = {
 			isa = PBXGroup;
 			children = (
-				451A07921980B4AC00B4570C /* Core */,
 				45101B3A1994942A00FD59A3 /* Vendor */,
+				451A07921980B4AC00B4570C /* Core */,
 				45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */,
 				45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */,
 				45F33E2D197F8392003542CF /* MMDataStoreController.h */,

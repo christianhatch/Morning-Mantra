@@ -10,6 +10,8 @@
 
 extern NSString *const kMMCrashlyticsID;
 
+extern NSString *const kMMParseAppID;
+extern NSString *const kMMParseClientKey;
 
 
 

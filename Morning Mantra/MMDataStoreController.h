@@ -9,14 +9,10 @@
 @import Foundation;
 
 
-extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
-
 @interface MMDataStoreController : NSObject
-
 
 + (NSArray *)allMantras;
 
-//+ (NSString *)randomMantra;
 + (NSString *)randomMantraGreeting;
 
 + (void)addMantra:(NSString *)mantra;
@@ -25,7 +21,6 @@ extern NSString *const kMMDataStoreControllerUserGreetingNameKey;
 
 
 + (void)scheduleLocalNotifications;
-
 
 @end
 
