@@ -43,6 +43,7 @@
     _dynamicAnimator = [[UIDynamicAnimator alloc] initWithCollectionViewLayout:self];
     _visibleIndexPathsSet = [NSMutableSet set];
     _visibleHeaderAndFooterSet = [[NSMutableSet alloc] init];
+//    self.itemSize = CGSizeMake(0.1, 0.1); 
 }
 
 - (void)prepareLayout {

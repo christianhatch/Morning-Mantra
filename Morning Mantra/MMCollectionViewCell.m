@@ -41,7 +41,7 @@ static CGSize _extraMargins = {0,0};
     // add to intrinsic content size of label
     size.width += _extraMargins.width;
     size.height += _extraMargins.height;
-    
+        
     return size;
 }
 

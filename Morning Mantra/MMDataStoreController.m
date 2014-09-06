@@ -11,9 +11,6 @@
 #import "MMDataStoreController.h"
 #import "NSURL+MMExtended.h"
 #import "MMConstants.h"
-#import <UIAlertView-Blocks/UIAlertView+Blocks.h>
-#import <UIAlertView-Blocks/RIButtonItem.h>
-
 
 #define kMMDataStoreControllerUsedMantrasURL   [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"unusedMantras" extension:nil]
 #define kMMDataStoreControllerUnUsedMantrasURL [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"usedMantras" extension:nil]
@@ -89,8 +86,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 + (NSString *)randomMantraGreeting
 {
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
-    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey])
-    {
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey]) {
         userName = @"friend";
     }
     
@@ -147,7 +143,6 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
     
-    
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
     [components setHour:8]; 
@@ -176,12 +171,10 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 {
     NSInteger rando = 0;
     
-    if (self.unUsedMantras.count == 1)
-    {
+    if (self.unUsedMantras.count == 1) {
         rando = 0;
     }
-    else if (self.unUsedMantras.count > 1)
-    {
+    else if (self.unUsedMantras.count > 1) {
         int limit = (int)self.unUsedMantras.count;
         rando = arc4random_uniform(limit);
     }
@@ -282,6 +275,9 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 
 
+#import <UIAlertView-Blocks/UIAlertView+Blocks.h>
+#import <UIAlertView-Blocks/RIButtonItem.h>
+
 
 @implementation MMDataStoreController (UIAdditions)
 
@@ -305,17 +301,9 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
                                                        if (completion) {
                                                            completion();
                                                        }
-//                                                       [self.tableView reloadData];
                                                    }];
     
     [alert addButtonItem:addMantra];
-    
-
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Mantra"
-//                                                    message:nil
-//                                                   delegate:self
-//                                          cancelButtonTitle:@"Cancel"
-//                                          otherButtonTitles:@"Add Mantra", nil];
     
     alert.alertViewStyle = UIAlertViewStylePlainTextInput;
     

@@ -13,10 +13,11 @@
 @interface MMViewController ()
 
 @property (nonatomic, strong) MMCollectionViewCell *prototypeCell;
-
 @property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
 
 @end
+
+
 
 @implementation MMViewController
 
@@ -47,8 +48,7 @@ static NSString * CellIdentifier = @"MMCollectionViewCell";
     
     [self.collectionView.collectionViewLayout invalidateLayout];
     
-    if ([MMDataStoreController shouldPresentAddNameUI])
-    {
+    if ([MMDataStoreController shouldPresentAddNameUI]) {
         [MMDataStoreController presentAddNameUIWithCompletion:nil];
     }
 }
@@ -77,7 +77,7 @@ static NSString * CellIdentifier = @"MMCollectionViewCell";
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
     
