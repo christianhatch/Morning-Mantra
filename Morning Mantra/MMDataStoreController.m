@@ -312,17 +312,12 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 + (void)presentAddNameUIWithCompletion:(void (^)(void))completion
 {
-    RIButtonItem *cancel = [RIButtonItem itemWithLabel:@"Cancel"
-                                                action:nil];
-    
-    
     UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What's your name?"
                                                     message:@"Enter your name below to personalize your Morning Mantra"
-                                           cancelButtonItem:cancel
+                                           cancelButtonItem:nil
                                            otherButtonItems:nil, nil];
     
-    
-    RIButtonItem *addName = [RIButtonItem itemWithLabel:@"Add Mantra"
+    RIButtonItem *addName = [RIButtonItem itemWithLabel:@"Continue"
                                                  action:^{
                                                      NSString *name = [alert textFieldAtIndex:0].text;
                                                      
