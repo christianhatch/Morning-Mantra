@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Knot Labs. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 @interface MMTableViewCell : UITableViewCell
 

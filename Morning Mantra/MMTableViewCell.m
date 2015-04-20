@@ -11,7 +11,8 @@
 @implementation MMTableViewCell
 
 - (void)awakeFromNib {
-    // Initialization code
+   
+    self.contentView.backgroundColor = [[UIColor purpleColor] colorWithAlphaComponent:0.5];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {

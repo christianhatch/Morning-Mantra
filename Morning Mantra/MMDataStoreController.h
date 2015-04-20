@@ -13,17 +13,20 @@
 
 + (NSArray *)allMantras;
 
-+ (NSString *)randomMantraGreeting;
++ (NSString *)randomMantraWithNameGreeting;
 
 + (void)addMantra:(NSString *)mantra;
 
 + (void)removeMantra:(NSString *)mantra;
 
+@end
+
+
+@interface MMDataStoreController (Notifications)
 
 + (void)scheduleLocalNotifications;
 
 @end
-
 
 
 @interface MMDataStoreController (UIAdditions)

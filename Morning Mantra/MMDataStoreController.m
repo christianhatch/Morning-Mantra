@@ -83,7 +83,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     return mantra;
 }
 
-+ (NSString *)randomMantraGreeting
++ (NSString *)randomMantraWithNameGreeting
 {
     NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
     if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey]) {
@@ -138,32 +138,6 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 //        DebugLog(@"Removed Mantra %@: Success=%i", mantra, success);
     }
 }
-
-+ (void)scheduleLocalNotifications
-{
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setHour:8]; 
-    [components setMinute:0];
-    [components setSecond:0];
-    [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
-    NSDate *dateToFire = [calendar dateFromComponents:components];
-    
-    
-    UILocalNotification *localNote = [[UILocalNotification alloc] init];
-    localNote.repeatInterval = NSCalendarUnitDay;
-    localNote.timeZone = [NSTimeZone defaultTimeZone];
-    localNote.fireDate = dateToFire;
-    
-//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
-    localNote.alertBody = [MMDataStoreController randomMantraGreeting];
-    localNote.alertAction = @"view";
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
-}
-
 
 #pragma mark - Internal
 
@@ -254,14 +228,15 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     {
         _allMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerAllMantrasURL];
         
-        if (_allMantras.count == 0 || _allMantras == nil)
+        if (_allMantras.count == 0)
         {
             _allMantras = [[NSMutableArray alloc] initWithArray:@[@"Have a mantra.",
                                                                   @"Life is a marathon, not a sprint.",
                                                                   @"Everything is built in small steps.",
                                                                   @"Write stuff down.",
                                                                   @"A goal isn’t a goal unless you have to reach for it.",
-                                                                  ] copyItems:YES];
+                                                                  ]
+                                                      copyItems:YES];
         }
 
     }
@@ -271,6 +246,37 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 
 @end
+
+
+
+
+@implementation MMDataStoreController (Notifications)
+
++ (void)scheduleLocalNotifications
+{
+    [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [[NSDateComponents alloc] init];
+    [components setHour:9];
+    [components setMinute:0];
+    [components setSecond:0];
+    [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
+    NSDate *dateToFire = [calendar dateFromComponents:components];
+    
+    
+    UILocalNotification *localNote = [[UILocalNotification alloc] init];
+    localNote.timeZone = [NSTimeZone defaultTimeZone];
+    localNote.fireDate = dateToFire;
+    //    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
+    localNote.alertBody = [MMDataStoreController randomMantraWithNameGreeting];
+    localNote.alertAction = @"view";
+    
+    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
+}
+
+@end
+
 
 
 
@@ -345,14 +351,6 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 }
 
 @end
-
-
-
-
-
-
-
-
 
 
 
