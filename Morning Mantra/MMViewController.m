@@ -12,10 +12,7 @@
 
 @interface MMViewController ()
 
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
-
 @end
-
 
 
 @implementation MMViewController
@@ -24,12 +21,9 @@
 {
     [super viewDidLoad];
         
-//    UINib *cellNib = [UINib nibWithNibName:@"MMTableViewCell" bundle:nil];
     [self.tableView registerClass:[MMTableViewCell class] forCellReuseIdentifier:@"MMTableViewCell"];
-    
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
-//    self.prototypeCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated

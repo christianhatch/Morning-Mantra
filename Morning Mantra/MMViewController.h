@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface MMViewController : UIViewController
+@interface MMViewController : UITableViewController
 
 @end
