@@ -8,8 +8,10 @@
 
 #import "AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
+#import <Parse/Parse.h>
 #import "MMDataStoreController.h"
 #import "MMConstants.h"
+
 
 @interface AppDelegate ()
 
@@ -21,6 +23,11 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {    
     self.window.tintColor = [UIColor purpleColor];
+
+    [Parse setApplicationId:kMMParseAppID
+                  clientKey:kMMParseClientKey];
+    
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
 
     [Crashlytics startWithAPIKey:kMMCrashlyticsID];
     
