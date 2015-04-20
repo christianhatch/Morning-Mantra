@@ -1,5 +1,10 @@
 inhibit_all_warnings!
 
-platform :ios, '8.3'
+platform :ios, '7.1'
 
-pod 'UIAlertView-Blocks'
+
+pod 'Parse-iOS-SDK'
+
+pod 'pop'
+
+pod 'Tweaks'

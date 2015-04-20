@@ -83,7 +83,7 @@ typedef enum FBAdvertisingTrackingStatus {
 + (NSString *)attributionID;
 + (NSString *)advertiserID;
 + (FBAdvertisingTrackingStatus)advertisingTrackingStatus;
-+ (void)updateParametersWithEventUsageLimitsAndBundleInfo:(NSMutableDictionary *)parameters
++ (void)extendDictionaryWithEventUsageLimitsAndUrlSchemes:(NSMutableDictionary *)parameters
                           accessAdvertisingTrackingStatus:(BOOL)accessAdvertisingTrackingStatus;
 
 #pragma mark - JSON Encode / Decode

@@ -236,14 +236,14 @@ static const CFTimeInterval kBFViewAnimationDuration = 0.25f;
 
 - (void)openRefererAppLink:(BFAppLink *)refererAppLink {
     if (refererAppLink) {
-        if ([_delegate respondsToSelector:@selector(returnToRefererController:willNavigateToAppLink:)]) {
+        if ([_delegate respondsToSelector:@selector(returnToRefererController:willOpenAppLink:)]) {
             [_delegate returnToRefererController:self willNavigateToAppLink:refererAppLink];
         }
 
         NSError *error = nil;
         BFAppLinkNavigationType type = [BFAppLinkNavigation navigateToAppLink:refererAppLink error:&error];
 
-        if ([_delegate respondsToSelector:@selector(returnToRefererController:didNavigateToAppLink:type:)]) {
+        if ([_delegate respondsToSelector:@selector(returnToRefererController:didOpenURL:success:)]) {
             [_delegate returnToRefererController:self didNavigateToAppLink:refererAppLink type:type];
         }
     }

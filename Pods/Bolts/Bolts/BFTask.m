@@ -140,11 +140,6 @@ __attribute__ ((noinline)) void warnBlockingOperationOnMainThread() {
     return tcs.task;
 }
 
-+ (BFTask *)taskFromExecutor:(BFExecutor *)executor
-                   withBlock:(id (^)())block {
-    return [[self taskWithResult:nil] continueWithExecutor:executor withBlock:block];
-}
-
 #pragma mark - Custom Setters/Getters
 
 - (id)result {

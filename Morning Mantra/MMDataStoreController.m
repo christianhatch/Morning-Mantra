@@ -6,11 +6,10 @@
 //  Copyright (c) 2014 Knot Labs. All rights reserved.
 //
 
-@import UIKit;
-
 #import "MMDataStoreController.h"
 #import "NSURL+MMExtended.h"
 #import "MMConstants.h"
+#import <UIKit/UIKit.h>
 
 #define kMMDataStoreControllerUsedMantrasURL   [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"unusedMantras" extension:nil]
 #define kMMDataStoreControllerUnUsedMantrasURL [NSURL libraryFileURLWithDirectory:@"mantras" filename:@"usedMantras" extension:nil]
@@ -26,7 +25,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 @property (nonatomic, strong) NSMutableArray *allMantras;
 
 ///An array of fresh, not previously displayed Mantras.
-@property (nonatomic, strong) NSMutableArray *unUsedMantras;
+@property (nonatomic, strong) NSMutableArray *freshMantras;
 
 ///An array of old, used, already displayed Mantras.
 @property (nonatomic, strong) NSMutableArray *usedMantras;
@@ -61,38 +60,27 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     return all;
 }
 
-+ (NSString *)randomMantra
++ (NSString *)randomNonRepeatingMantra
 {
-    if ([MMDataStoreController sharedController].allMantras.count == 0 || [MMDataStoreController sharedController].unUsedMantras.count == 0)
+    if ([MMDataStoreController sharedController].allMantras.count == 0 || [MMDataStoreController sharedController].freshMantras.count == 0)
     {
 //        DebugLog(@"Arrays are empty. Returning nil for random. %@", @"");
         
         return nil;
     }
     
-    NSInteger index = [[MMDataStoreController sharedController] randomIndex];
-    NSString *mantra = [MMDataStoreController sharedController].unUsedMantras[index];
+    NSInteger index = [[MMDataStoreController sharedController] randomValidIndex];
+    NSString *mantra = [MMDataStoreController sharedController].freshMantras[index];
     
 //    DebugLog(@"Random Mantra: %@", mantra);
 
-    [[MMDataStoreController sharedController].unUsedMantras removeObjectAtIndex:index];
-    [[MMDataStoreController sharedController].unUsedMantras addObject:mantra];
+    [[MMDataStoreController sharedController].freshMantras removeObjectAtIndex:index];
+    [[MMDataStoreController sharedController].freshMantras addObject:mantra];
     
     [[MMDataStoreController sharedController] persistAllData];
     
     return mantra;
 }
-
-+ (NSString *)randomMantraGreeting
-{
-    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
-    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey]) {
-        userName = @"friend";
-    }
-    
-    return [NSString stringWithFormat:@"Hi %@, %@", userName, [MMDataStoreController randomMantra]];
-}
-
 
 + (void)addMantra:(NSString *)mantra
 {
@@ -102,9 +90,9 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
         [[MMDataStoreController sharedController].allMantras addObject:mantra];
         
-        if (![[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        if (![[MMDataStoreController sharedController].freshMantras containsObject:mantra])
         {
-            [[MMDataStoreController sharedController].unUsedMantras addObject:mantra];
+            [[MMDataStoreController sharedController].freshMantras addObject:mantra];
         }
         
 //        BOOL success =
@@ -122,14 +110,14 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
         [[MMDataStoreController sharedController].allMantras removeObject:mantra];
         
-        if ([[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        if ([[MMDataStoreController sharedController].freshMantras containsObject:mantra])
         {
-            [[MMDataStoreController sharedController].unUsedMantras removeObject:mantra];
+            [[MMDataStoreController sharedController].freshMantras removeObject:mantra];
         }
         
-        if ([[MMDataStoreController sharedController].unUsedMantras containsObject:mantra])
+        if ([[MMDataStoreController sharedController].freshMantras containsObject:mantra])
         {
-            [[MMDataStoreController sharedController].unUsedMantras removeObject:mantra];
+            [[MMDataStoreController sharedController].freshMantras removeObject:mantra];
         }
         
 //        BOOL success =
@@ -142,6 +130,17 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 + (void)scheduleLocalNotifications
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
+    
+    
+    NSString *userName = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey];
+    
+    if (![[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey])
+    {
+        userName = @"friend";
+    }
+    
+    NSString *mantra = [MMDataStoreController randomNonRepeatingMantra];
+
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [[NSDateComponents alloc] init];
@@ -157,25 +156,26 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     localNote.timeZone = [NSTimeZone defaultTimeZone];
     localNote.fireDate = dateToFire;
     
-//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
-    localNote.alertBody = [MMDataStoreController randomMantraGreeting];
-    localNote.alertAction = @"view";
+//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
+    localNote.alertBody = [NSString stringWithFormat:@"Hi %@, %@", userName, mantra];
+    localNote.alertAction = mantra;
     
     [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
 }
 
-
 #pragma mark - Internal
 
-- (NSInteger)randomIndex
+- (NSInteger)randomValidIndex
 {
     NSInteger rando = 0;
     
-    if (self.unUsedMantras.count == 1) {
+    if (self.freshMantras.count == 1)
+    {
         rando = 0;
     }
-    else if (self.unUsedMantras.count > 1) {
-        int limit = (int)self.unUsedMantras.count;
+    else if (self.freshMantras.count > 1)
+    {
+        int limit = (int)self.freshMantras.count;
         rando = arc4random_uniform(limit);
     }
     
@@ -186,21 +186,21 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 - (void)reFillUnusedMantras
 {
-    DebugLog(@"Refilling Unused from Used: %@", self.unUsedMantras);
+    DebugLog(@"Refilling Unused from Used: %@", self.freshMantras);
 
-    [self.unUsedMantras addObjectsFromArray:self.unUsedMantras];
+    [self.freshMantras addObjectsFromArray:self.freshMantras];
     
-    [self.unUsedMantras removeAllObjects];
+    [self.freshMantras removeAllObjects];
     
     [self persistAllData];
 }
 
 - (BOOL)persistAllData
 {
-    BOOL used = [self.unUsedMantras writeToURL:kMMDataStoreControllerUsedMantrasURL
+    BOOL used = [self.freshMantras writeToURL:kMMDataStoreControllerUsedMantrasURL
                                   atomically:YES];
     
-    BOOL unUsed = [self.unUsedMantras writeToURL:kMMDataStoreControllerUnUsedMantrasURL
+    BOOL unUsed = [self.freshMantras writeToURL:kMMDataStoreControllerUnUsedMantrasURL
                                       atomically:YES];
     
     BOOL all = [self.allMantras writeToURL:kMMDataStoreControllerAllMantrasURL
@@ -220,18 +220,18 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 #pragma mark - Getters
 
-- (NSMutableArray *)unUsedMantras
+- (NSMutableArray *)freshMantras
 {
-    if (!_unUsedMantras)
+    if (!_freshMantras)
     {
-        _unUsedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUnUsedMantrasURL];
+        _freshMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUnUsedMantrasURL];
         
-        if (_unUsedMantras.count == 0 || _unUsedMantras == nil)
+        if (_freshMantras.count == 0 || _freshMantras == nil)
         {
-            _unUsedMantras = [[NSMutableArray alloc] initWithArray:[MMDataStoreController sharedController].allMantras copyItems:YES];
+            _freshMantras = [[NSMutableArray alloc] initWithArray:[MMDataStoreController sharedController].allMantras copyItems:YES];
         }
     }
-    return _unUsedMantras;
+    return _freshMantras;
 }
 
 - (NSMutableArray *)usedMantras
@@ -271,89 +271,3 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 
 @end
-
-
-
-
-#import <UIAlertView-Blocks/UIAlertView+Blocks.h>
-#import <UIAlertView-Blocks/RIButtonItem.h>
-
-
-@implementation MMDataStoreController (UIAdditions)
-
-+ (void)presentAddMantraUIWithCompletion:(void (^)(void))completion
-{
-    RIButtonItem *cancel = [RIButtonItem itemWithLabel:@"Cancel"
-                                                action:nil];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Add Mantra"
-                                                    message:nil
-                                           cancelButtonItem:cancel
-                                           otherButtonItems:nil, nil];
-    
-    RIButtonItem *addMantra = [RIButtonItem itemWithLabel:@"Add Mantra"
-                                                   action:^{
-                                                       NSString *mantra = [alert textFieldAtIndex:0].text;
-                                                       
-                                                       DebugLog(@"new mantra to add %@", mantra);
-                                                       
-                                                       [MMDataStoreController addMantra:mantra];
-                                                       if (completion) {
-                                                           completion();
-                                                       }
-                                                   }];
-    
-    [alert addButtonItem:addMantra];
-    
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    [alert show];
-}
-
-+ (void)presentAddNameUIWithCompletion:(void (^)(void))completion
-{
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"What's your name?"
-                                                    message:@"Enter your name below to personalize your Morning Mantra"
-                                           cancelButtonItem:nil
-                                           otherButtonItems:nil, nil];
-    
-    RIButtonItem *addName = [RIButtonItem itemWithLabel:@"Continue"
-                                                 action:^{
-                                                     NSString *name = [alert textFieldAtIndex:0].text;
-                                                     
-                                                     if (name && name.length > 0)
-                                                     {
-                                                         DebugLog(@"greeting was added %@", name);
-                                                         
-                                                         [[NSUserDefaults standardUserDefaults] setObject:name
-                                                                                                   forKey:kMMDataStoreControllerUserGreetingNameKey];
-                                                         [[NSUserDefaults standardUserDefaults] synchronize];
-                                                     }
-                                                 }];
-    
-    [alert addButtonItem:addName];
-
-    alert.alertViewStyle = UIAlertViewStylePlainTextInput;
-    
-    [alert show];
-}
-
-+ (BOOL)shouldPresentAddNameUI
-{
-    BOOL noGreetingNameSaved = [[NSUserDefaults standardUserDefaults] stringForKey:kMMDataStoreControllerUserGreetingNameKey] == nil;
-    return noGreetingNameSaved;
-}
-
-@end
-
-
-
-
-
-
-
-
-
-
-
-

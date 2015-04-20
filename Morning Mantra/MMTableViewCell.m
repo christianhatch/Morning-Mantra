@@ -2,22 +2,26 @@
 //  MMTableViewCell.m
 //  Morning Mantra
 //
-//  Created by Christian Hatch on 4/19/15.
-//  Copyright (c) 2015 Knot Labs. All rights reserved.
+//  Created by Christian Hatch on 7/23/14.
+//  Copyright (c) 2014 Knot Labs. All rights reserved.
 //
 
 #import "MMTableViewCell.h"
 
 @implementation MMTableViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
+//    self.contentView.backgroundColor = [UIColor greenColor];
+//    self.mantraLabel.backgroundColor = [UIColor yellowColor]; 
 }
 
-- (void)setSelected:(BOOL)selected animated:(BOOL)animated {
-    [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
+- (void)layoutSubviews
+{
+    [super layoutSubviews];
+    
+    [self.contentView layoutIfNeeded];
+    self.mantraLabel.preferredMaxLayoutWidth = CGRectGetWidth(self.mantraLabel.frame);
 }
 
 @end
