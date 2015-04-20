@@ -22,7 +22,9 @@
     [super viewDidLoad];
         
     [self.tableView registerClass:[MMTableViewCell class] forCellReuseIdentifier:@"MMTableViewCell"];
-
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension; 
+    
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
@@ -64,11 +66,33 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MMTableViewCell" forIndexPath:indexPath];
+    MMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MMTableViewCell" forIndexPath:indexPath];
     
     cell.textLabel.text = [[MMDataStoreController allMantras] objectAtIndex:indexPath.row];
     
     return cell;
+}
+
+
+#pragma mark - Copy Menu
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    return (action == @selector(copy:));
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(copy:)) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        [[UIPasteboard generalPasteboard] setString:cell.textLabel.text];
+    }
 }
 
 @end
