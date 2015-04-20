@@ -17,15 +17,22 @@
 
 @implementation MMViewController
 
+NSString *const MMTableViewCellID = @"MMTableViewCellID";
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
         
-    [self.tableView registerClass:[MMTableViewCell class] forCellReuseIdentifier:@"MMTableViewCell"];
+    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:MMTableViewCellID];
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension; 
     
     self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(didChangePreferredContentSize:)
+                                                 name:UIContentSizeCategoryDidChangeNotification
+                                               object:nil];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -64,15 +71,37 @@
     return UITableViewAutomaticDimension;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewAutomaticDimension;
+}
+
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    MMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MMTableViewCell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MMTableViewCellID forIndexPath:indexPath];
     
     cell.textLabel.text = [[MMDataStoreController allMantras] objectAtIndex:indexPath.row];
     
     return cell;
 }
 
+
+#pragma mark - UITableView Editing
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        [MMDataStoreController removeMantra:[[MMDataStoreController allMantras] objectAtIndex:indexPath.row]];
+        [tableView reloadData];
+        self.editing = NO; 
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert)
+    {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        
+    }
+}
 
 #pragma mark - Copy Menu
 
@@ -94,5 +123,13 @@
         [[UIPasteboard generalPasteboard] setString:cell.textLabel.text];
     }
 }
+
+#pragma mark - Font Size
+
+- (void)didChangePreferredContentSize:(NSNotification *)notification
+{
+    [self.tableView reloadData];
+}
+
 
 @end
