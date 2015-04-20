@@ -18,8 +18,6 @@
 		450A5F7D199689BF00CC994D /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450A5F73199689BF00CC994D /* Security.framework */; };
 		450A5F7E199689BF00CC994D /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450A5F74199689BF00CC994D /* StoreKit.framework */; };
 		450A5F7F199689BF00CC994D /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 450A5F75199689BF00CC994D /* SystemConfiguration.framework */; };
-		45101B341994895C00FD59A3 /* TLSpringFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */; };
-		45101B351994895C00FD59A3 /* TLSpringFlowLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */; };
 		45101B38199493C900FD59A3 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B37199493C900FD59A3 /* MMCollectionViewCell.m */; };
 		45101B39199493C900FD59A3 /* MMCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 45101B37199493C900FD59A3 /* MMCollectionViewCell.m */; };
 		45101B3C1994A17300FD59A3 /* MMCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45101B3B1994A17300FD59A3 /* MMCollectionViewCell.xib */; };
@@ -63,8 +61,6 @@
 		450A5F73199689BF00CC994D /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		450A5F74199689BF00CC994D /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		450A5F75199689BF00CC994D /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		45101B321994895C00FD59A3 /* TLSpringFlowLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TLSpringFlowLayout.h; sourceTree = "<group>"; };
-		45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TLSpringFlowLayout.m; sourceTree = "<group>"; };
 		45101B36199493C900FD59A3 /* MMCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMCollectionViewCell.h; sourceTree = "<group>"; };
 		45101B37199493C900FD59A3 /* MMCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMCollectionViewCell.m; sourceTree = "<group>"; };
 		45101B3B1994A17300FD59A3 /* MMCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MMCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -121,15 +117,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		45101B3A1994942A00FD59A3 /* Vendor */ = {
-			isa = PBXGroup;
-			children = (
-				45101B321994895C00FD59A3 /* TLSpringFlowLayout.h */,
-				45101B331994895C00FD59A3 /* TLSpringFlowLayout.m */,
-			);
-			name = Vendor;
-			sourceTree = "<group>";
-		};
 		451A07921980B4AC00B4570C /* Core */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,7 +151,6 @@
 		45217DF7197F7A2A00A4ECA2 /* Morning Mantra */ = {
 			isa = PBXGroup;
 			children = (
-				45101B3A1994942A00FD59A3 /* Vendor */,
 				451A07921980B4AC00B4570C /* Core */,
 				45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */,
 				45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */,
@@ -383,7 +369,6 @@
 				45F33E33197F883E003542CF /* NSURL+MMExtended.m in Sources */,
 				45101B38199493C900FD59A3 /* MMCollectionViewCell.m in Sources */,
 				45217DFE197F7A2A00A4ECA2 /* AppDelegate.m in Sources */,
-				45101B341994895C00FD59A3 /* TLSpringFlowLayout.m in Sources */,
 				45217DFB197F7A2A00A4ECA2 /* main.m in Sources */,
 				45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */,
 				45F33E37197F9B9D003542CF /* MMConstants.m in Sources */,
@@ -395,7 +380,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				45101B351994895C00FD59A3 /* TLSpringFlowLayout.m in Sources */,
 				4519115D19947E8E00427450 /* MMViewController.m in Sources */,
 				45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */,
 				45101B39199493C900FD59A3 /* MMCollectionViewCell.m in Sources */,

@@ -9,7 +9,9 @@
 #import "MMCollectionViewCell.h"
 
 @interface MMCollectionViewCell ()
+
 @property (weak, nonatomic) IBOutlet UIButton *topRightButton;
+
 @end
 
 @implementation MMCollectionViewCell
