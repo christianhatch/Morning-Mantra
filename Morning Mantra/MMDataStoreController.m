@@ -157,7 +157,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     localNote.timeZone = [NSTimeZone defaultTimeZone];
     localNote.fireDate = dateToFire;
     
-//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5];
+//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
     localNote.alertBody = [MMDataStoreController randomMantraGreeting];
     localNote.alertAction = @"view";
     

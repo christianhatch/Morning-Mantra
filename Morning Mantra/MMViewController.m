@@ -8,13 +8,11 @@
 
 #import "MMViewController.h"
 #import "MMDataStoreController.h"
-#import "MMCollectionViewCell.h"
-
+#import "MMTableViewCell.h"
 
 @interface MMViewController ()
 
-@property (nonatomic, strong) MMCollectionViewCell *prototypeCell;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
@@ -22,24 +20,16 @@
 
 @implementation MMViewController
 
-static NSString * CellIdentifier = @"MMCollectionViewCell";
-
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+        
+//    UINib *cellNib = [UINib nibWithNibName:@"MMTableViewCell" bundle:nil];
+    [self.tableView registerClass:[MMTableViewCell class] forCellReuseIdentifier:@"MMTableViewCell"];
     
-//    self.navigationItem.prompt = [MMDataStoreController randomMantraGreeting];
-    
-    UINib *cellNib = [UINib nibWithNibName:@"MMCollectionViewCell" bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"MMCollectionViewCell"];
-    
-    self.prototypeCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(didChangePreferredContentSize:)
-                                                 name:UIContentSizeCategoryDidChangeNotification
-                                               object:nil];
+//    self.prototypeCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -53,80 +43,38 @@ static NSString * CellIdentifier = @"MMCollectionViewCell";
     }
 }
 
-- (void)viewDidLayoutSubviews
-{
-//    [self.collectionView layoutIfNeeded];
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
-}
-
 - (IBAction)addMantraButtonTapped:(id)sender
 {
     [MMDataStoreController presentAddMantraUIWithCompletion:^{
-        [self.collectionView reloadData];
+        [self.tableView reloadData];
     }];
 }
 
 
-#pragma mark - UICollectionView Methods
+#pragma mark - TableView Data Source
 
-- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [MMDataStoreController allMantras].count;
 }
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 1; 
+    return UITableViewAutomaticDimension;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    MMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
-                                                                                forIndexPath:indexPath];
-    [self configureCell:cell forRowAtIndexPath:indexPath];
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"MMTableViewCell" forIndexPath:indexPath];
+    
+    cell.textLabel.text = [[MMDataStoreController allMantras] objectAtIndex:indexPath.row];
     
     return cell;
 }
-
-- (CGSize)collectionView:(UICollectionView *)collectionView
-                  layout:(UICollectionViewLayout *)collectionViewLayout
-  sizeForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
-    
-    CGSize size = [self.prototypeCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-    
-//    NSLog(@"size %@", NSStringFromCGSize(size));
-    
-    return size;
-}
-
-
-
-
-#pragma Mark - Internal
-
-- (void)configureCell:(UICollectionViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell isKindOfClass:[MMCollectionViewCell class]])
-    {
-//        NSLog(@"mantra %@", [MMDataStoreController allMantras][indexPath.row]);
-
-        MMCollectionViewCell *textCell = (MMCollectionViewCell *)cell;
-        textCell.label.text = [MMDataStoreController allMantras][indexPath.section];
-        textCell.label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
-    }
-}
-
-
-- (void)didChangePreferredContentSize:(NSNotification *)notification
-{
-    [self.collectionView.collectionViewLayout invalidateLayout];
-    [self.collectionView reloadData];
-}
-
-
-
 
 @end
