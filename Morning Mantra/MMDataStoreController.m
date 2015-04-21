@@ -139,6 +139,20 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     }
 }
 
++ (void)setNameForGreeting:(NSString *)name
+{
+    if (name && name.length > 0)
+    {
+//        DebugLog(@"greeting was added %@", name);
+        
+        [[NSUserDefaults standardUserDefaults] setObject:name
+                                                  forKey:kMMDataStoreControllerUserGreetingNameKey];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+
+}
+
+
 #pragma mark - Internal
 
 - (NSInteger)randomIndex
@@ -160,7 +174,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
 
 - (void)reFillUnusedMantras
 {
-    DebugLog(@"Refilling Unused from Used: %@", self.unUsedMantras);
+//    DebugLog(@"Refilling Unused from Used: %@", self.unUsedMantras);
 
     [self.unUsedMantras addObjectsFromArray:self.unUsedMantras];
     
@@ -200,7 +214,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     {
         _unUsedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUnUsedMantrasURL];
         
-        if (_unUsedMantras.count == 0 || _unUsedMantras == nil)
+        if (_unUsedMantras.count == 0)
         {
             _unUsedMantras = [[NSMutableArray alloc] initWithArray:[MMDataStoreController sharedController].allMantras copyItems:YES];
         }
@@ -214,7 +228,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     {
         _usedMantras = [NSMutableArray arrayWithContentsOfURL:kMMDataStoreControllerUsedMantrasURL];
         
-        if (_usedMantras.count == 0 || _usedMantras == nil)
+        if (_usedMantras.count == 0)
         {
             _usedMantras = [NSMutableArray arrayWithArray:@[]];
         }
@@ -243,40 +257,7 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
     return _allMantras;
 }
 
-
-
 @end
-
-
-
-
-@implementation MMDataStoreController (Notifications)
-
-+ (void)scheduleLocalNotifications
-{
-    [[UIApplication sharedApplication] cancelAllLocalNotifications];
-    
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [[NSDateComponents alloc] init];
-    [components setHour:9];
-    [components setMinute:0];
-    [components setSecond:0];
-    [calendar setTimeZone:[NSTimeZone defaultTimeZone]];
-    NSDate *dateToFire = [calendar dateFromComponents:components];
-    
-    
-    UILocalNotification *localNote = [[UILocalNotification alloc] init];
-    localNote.timeZone = [NSTimeZone defaultTimeZone];
-    localNote.fireDate = dateToFire;
-    //    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
-    localNote.alertBody = [MMDataStoreController randomMantraWithNameGreeting];
-    localNote.alertAction = @"view";
-    
-    [[UIApplication sharedApplication] scheduleLocalNotification:localNote];
-}
-
-@end
-
 
 
 
@@ -301,9 +282,10 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
                                                    action:^{
                                                        NSString *mantra = [alert textFieldAtIndex:0].text;
                                                        
-                                                       DebugLog(@"new mantra to add %@", mantra);
+//                                                       DebugLog(@"new mantra to add %@", mantra);
                                                        
                                                        [MMDataStoreController addMantra:mantra];
+                                                       
                                                        if (completion) {
                                                            completion();
                                                        }
@@ -327,14 +309,8 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
                                                  action:^{
                                                      NSString *name = [alert textFieldAtIndex:0].text;
                                                      
-                                                     if (name && name.length > 0)
-                                                     {
-                                                         DebugLog(@"greeting was added %@", name);
-                                                         
-                                                         [[NSUserDefaults standardUserDefaults] setObject:name
-                                                                                                   forKey:kMMDataStoreControllerUserGreetingNameKey];
-                                                         [[NSUserDefaults standardUserDefaults] synchronize];
-                                                     }
+                                                     [MMDataStoreController setNameForGreeting:name];
+                                                     
                                                  }];
     
     [alert addButtonItem:addName];

@@ -19,14 +19,10 @@
 
 + (void)removeMantra:(NSString *)mantra;
 
-@end
-
-
-@interface MMDataStoreController (Notifications)
-
-+ (void)scheduleLocalNotifications;
++ (void)setNameForGreeting:(NSString *)name; 
 
 @end
+
 
 
 @interface MMDataStoreController (UIAdditions)

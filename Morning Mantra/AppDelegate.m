@@ -26,8 +26,6 @@
 //                  clientKey:kMMParseClientKey];
 //    
 //    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-
-    [MMDataStoreController scheduleLocalNotifications];
     
     [Crashlytics startWithAPIKey:kMMCrashlyticsID];
     
