@@ -10,6 +10,8 @@
 
 @interface MMNotificationController : NSObject
 
++ (void)requestPermissionForNotifications;
+
 + (void)scheduleLocalNotificationWithText:(NSString *)text;
 
 @end

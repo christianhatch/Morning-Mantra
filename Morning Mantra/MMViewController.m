@@ -8,6 +8,7 @@
 
 #import "MMViewController.h"
 #import "MMDataStoreController.h"
+#import "MMNotificationController.h"
 #import "MMTableViewCell.h"
 
 @interface MMViewController ()
@@ -25,18 +26,10 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
 {
     [super viewDidLoad];
     
-    UIImageView *img = [[UIImageView alloc] initWithFrame:self.view.frame];
-    img.image = [UIImage imageNamed:@"MMLaunch"];
-    [self.view insertSubview:img atIndex:0];
-    
-    
     UINib *nib = [UINib nibWithNibName:@"MMTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:MMTableViewCellID];
     
     self.tableView.rowHeight = UITableViewAutomaticDimension;
-    self.tableView.estimatedRowHeight = UITableViewAutomaticDimension; 
-    
-    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
@@ -48,7 +41,9 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
 {
     [super viewDidAppear:animated];
     
-    [MMDataStoreController scheduleLocalNotificationWithText:[MMDataStoreController randomMantraWithNameGreeting]];
+    [MMNotificationController requestPermissionForNotifications];
+
+    [MMNotificationController scheduleLocalNotificationWithText:[MMDataStoreController randomMantraWithNameGreeting]];
     
     if ([MMDataStoreController shouldPresentAddNameUI]) {
         [MMDataStoreController presentAddNameUIWithCompletion:nil];
@@ -62,6 +57,10 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     }];
 }
 
+- (IBAction)editButtonTapped:(id)sender
+{
+    
+}
 
 #pragma mark - TableView Data Source
 

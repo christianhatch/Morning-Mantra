@@ -553,8 +553,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/chatch/Documents/FacebookSDK,
-					"/Users/chatch/Downloads/parse-library-1",
 				);
 				INFOPLIST_FILE = "Morning Mantra/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
@@ -579,8 +577,6 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
-					/Users/chatch/Documents/FacebookSDK,
-					"/Users/chatch/Downloads/parse-library-1",
 				);
 				INFOPLIST_FILE = "Morning Mantra/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;

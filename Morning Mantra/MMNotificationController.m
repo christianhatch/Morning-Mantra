@@ -12,6 +12,18 @@
 
 @implementation MMNotificationController
 
++ (void)requestPermissionForNotifications
+{
+    UIUserNotificationSettings *settings = [UIApplication sharedApplication].currentUserNotificationSettings;
+    BOOL hasPermission = settings.types == UIUserNotificationTypeAlert;
+   
+    if (!hasPermission) {
+        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:UIUserNotificationTypeAlert categories:nil];
+        [[UIApplication sharedApplication] registerUserNotificationSettings:settings];
+    }
+}
+
+
 + (void)scheduleLocalNotificationWithText:(NSString *)text
 {
     [[UIApplication sharedApplication] cancelAllLocalNotifications];
@@ -27,7 +39,7 @@
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
     localNote.timeZone = [NSTimeZone defaultTimeZone];
     localNote.fireDate = dateToFire;
-    //    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
+//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
     localNote.alertBody = text;
     localNote.alertAction = @"view";
     
