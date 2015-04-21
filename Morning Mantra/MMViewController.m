@@ -42,7 +42,6 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     [super viewDidAppear:animated];
     
     [MMNotificationController requestPermissionForNotifications];
-
     [MMNotificationController scheduleLocalNotificationWithText:[MMDataStoreController randomMantraWithNameGreeting]];
     
     if ([MMDataStoreController shouldPresentAddNameUI]) {
@@ -101,8 +100,10 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [MMDataStoreController removeMantra:[[MMDataStoreController allMantras] objectAtIndex:indexPath.row]];
-        [tableView reloadData];
-        self.editing = NO; 
+//        [tableView reloadData];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft]; 
+        
+        self.editing = NO;
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
     {
