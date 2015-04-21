@@ -14,6 +14,8 @@
 		45217E04197F7A2A00A4ECA2 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45217E02197F7A2A00A4ECA2 /* Main.storyboard */; };
 		45217E06197F7A2A00A4ECA2 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45217E05197F7A2A00A4ECA2 /* Images.xcassets */; };
 		45217E12197F7A2B00A4ECA2 /* Morning_MantraTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 45217E11197F7A2B00A4ECA2 /* Morning_MantraTests.m */; };
+		452227BE1AE5CF6F00DCB0E3 /* MMTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452227BD1AE5CF6F00DCB0E3 /* MMTableViewCell.xib */; };
+		452227C11AE5D5BB00DCB0E3 /* MMNotificationController.m in Sources */ = {isa = PBXBuildFile; fileRef = 452227C01AE5D5BB00DCB0E3 /* MMNotificationController.m */; };
 		459AE6EE1AE486D400823097 /* Launch Screen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 459AE6ED1AE486D400823097 /* Launch Screen.xib */; };
 		459AE6F11AE487AD00823097 /* MMTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 459AE6F01AE487AD00823097 /* MMTableViewCell.m */; };
 		45F33E1C197F7FEB003542CF /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 45F33E1B197F7FEB003542CF /* Crashlytics.framework */; };
@@ -74,6 +76,9 @@
 		452227AD1AE5A8F800DCB0E3 /* ParseFacebookUtils.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtils.framework; path = "../../../../../../Downloads/parse-library-1/ParseFacebookUtils.framework"; sourceTree = "<group>"; };
 		452227AE1AE5A8F800DCB0E3 /* ParseUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseUI.framework; path = "../../../../../../Downloads/parse-library-1/ParseUI.framework"; sourceTree = "<group>"; };
 		452227B81AE5AA4A00DCB0E3 /* ParseFacebookUtilsV4.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ParseFacebookUtilsV4.framework; path = "../../../../../../Downloads/parse-library-1/ParseFacebookUtilsV4.framework"; sourceTree = "<group>"; };
+		452227BD1AE5CF6F00DCB0E3 /* MMTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MMTableViewCell.xib; sourceTree = "<group>"; };
+		452227BF1AE5D5BB00DCB0E3 /* MMNotificationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMNotificationController.h; sourceTree = "<group>"; };
+		452227C01AE5D5BB00DCB0E3 /* MMNotificationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMNotificationController.m; sourceTree = "<group>"; };
 		459AE6ED1AE486D400823097 /* Launch Screen.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = "Launch Screen.xib"; sourceTree = "<group>"; };
 		459AE6EF1AE487AD00823097 /* MMTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MMTableViewCell.h; sourceTree = "<group>"; };
 		459AE6F01AE487AD00823097 /* MMTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MMTableViewCell.m; sourceTree = "<group>"; };
@@ -145,15 +150,9 @@
 				451A07921980B4AC00B4570C /* Core */,
 				45217DFC197F7A2A00A4ECA2 /* AppDelegate.h */,
 				45217DFD197F7A2A00A4ECA2 /* AppDelegate.m */,
-				45F33E2D197F8392003542CF /* MMDataStoreController.h */,
-				45F33E2E197F8392003542CF /* MMDataStoreController.m */,
-				45217E02197F7A2A00A4ECA2 /* Main.storyboard */,
-				4519115A19947E8E00427450 /* MMViewController.h */,
-				4519115B19947E8E00427450 /* MMViewController.m */,
-				459AE6EF1AE487AD00823097 /* MMTableViewCell.h */,
-				459AE6F01AE487AD00823097 /* MMTableViewCell.m */,
-				45217E05197F7A2A00A4ECA2 /* Images.xcassets */,
-				459AE6ED1AE486D400823097 /* Launch Screen.xib */,
+				452227C21AE5D5C300DCB0E3 /* Controllers */,
+				452227C31AE5D5D800DCB0E3 /* Resources */,
+				452227C41AE5D5E700DCB0E3 /* Views */,
 				45217DF8197F7A2A00A4ECA2 /* Supporting Files */,
 			);
 			path = "Morning Mantra";
@@ -184,6 +183,39 @@
 				45217E10197F7A2B00A4ECA2 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		452227C21AE5D5C300DCB0E3 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				45F33E2D197F8392003542CF /* MMDataStoreController.h */,
+				45F33E2E197F8392003542CF /* MMDataStoreController.m */,
+				452227BF1AE5D5BB00DCB0E3 /* MMNotificationController.h */,
+				452227C01AE5D5BB00DCB0E3 /* MMNotificationController.m */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		452227C31AE5D5D800DCB0E3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				45217E02197F7A2A00A4ECA2 /* Main.storyboard */,
+				452227BD1AE5CF6F00DCB0E3 /* MMTableViewCell.xib */,
+				459AE6ED1AE486D400823097 /* Launch Screen.xib */,
+				45217E05197F7A2A00A4ECA2 /* Images.xcassets */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		452227C41AE5D5E700DCB0E3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				4519115A19947E8E00427450 /* MMViewController.h */,
+				4519115B19947E8E00427450 /* MMViewController.m */,
+				459AE6EF1AE487AD00823097 /* MMTableViewCell.h */,
+				459AE6F01AE487AD00823097 /* MMTableViewCell.m */,
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 		DD7856663D934BE78555AA43 /* Frameworks */ = {
@@ -321,6 +353,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				45217E04197F7A2A00A4ECA2 /* Main.storyboard in Resources */,
+				452227BE1AE5CF6F00DCB0E3 /* MMTableViewCell.xib in Resources */,
 				459AE6EE1AE486D400823097 /* Launch Screen.xib in Resources */,
 				45217E06197F7A2A00A4ECA2 /* Images.xcassets in Resources */,
 			);
@@ -389,6 +422,7 @@
 			files = (
 				45F33E33197F883E003542CF /* NSURL+MMExtended.m in Sources */,
 				45217DFE197F7A2A00A4ECA2 /* AppDelegate.m in Sources */,
+				452227C11AE5D5BB00DCB0E3 /* MMNotificationController.m in Sources */,
 				45217DFB197F7A2A00A4ECA2 /* main.m in Sources */,
 				45F33E2F197F8392003542CF /* MMDataStoreController.m in Sources */,
 				45F33E37197F9B9D003542CF /* MMConstants.m in Sources */,

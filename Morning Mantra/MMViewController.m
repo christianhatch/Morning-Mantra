@@ -12,6 +12,8 @@
 
 @interface MMViewController ()
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 
@@ -22,8 +24,15 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-        
-    [self.tableView registerClass:[UITableViewCell class] forCellReuseIdentifier:MMTableViewCellID];
+    
+    UIImageView *img = [[UIImageView alloc] initWithFrame:self.view.frame];
+    img.image = [UIImage imageNamed:@"MMLaunch"];
+    [self.view insertSubview:img atIndex:0];
+    
+    
+    UINib *nib = [UINib nibWithNibName:@"MMTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:MMTableViewCellID];
+    
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = UITableViewAutomaticDimension; 
     
@@ -39,7 +48,7 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
 {
     [super viewDidAppear:animated];
     
-    [MMDataStoreController scheduleLocalNotifications];
+    [MMDataStoreController scheduleLocalNotificationWithText:[MMDataStoreController randomMantraWithNameGreeting]];
     
     if ([MMDataStoreController shouldPresentAddNameUI]) {
         [MMDataStoreController presentAddNameUIWithCompletion:nil];
@@ -78,7 +87,7 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MMTableViewCellID forIndexPath:indexPath];
+    MMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MMTableViewCellID forIndexPath:indexPath];
     
     cell.textLabel.text = [[MMDataStoreController allMantras] objectAtIndex:indexPath.row];
     
