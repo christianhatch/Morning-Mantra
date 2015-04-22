@@ -1,13 +1,6 @@
-inhibit_all_warnings!
-
-platform :ios, '7.1'
-
-#pod 'Parse-iOS-SDK'
-
-#pod 'pop'
-
-pod 'Tweaks'
+platform :ios, '8.3'
 
 pod 'UIAlertView-Blocks'
 
-pod 'Facebook-iOS-SDK'
+#pod 'Facebook-iOS-SDK'
+#pod 'Bolts'

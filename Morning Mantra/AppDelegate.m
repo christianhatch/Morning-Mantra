@@ -8,7 +8,7 @@
 
 #import "AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-#import <Parse/Parse.h>
+//#import <Parse/Parse.h>
 #import "MMDataStoreController.h"
 #import "MMConstants.h"
 
@@ -18,17 +18,15 @@
 @end
 
 @implementation AppDelegate
-            
+
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
-{    
-    self.window.tintColor = [UIColor purpleColor];
-
-    [Parse setApplicationId:kMMParseAppID
-                  clientKey:kMMParseClientKey];
+{   
+//    [Parse setApplicationId:kMMParseAppID
+//                  clientKey:kMMParseClientKey];
+//    
+//    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
-    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
-
     [Crashlytics startWithAPIKey:kMMCrashlyticsID];
     
     return YES;

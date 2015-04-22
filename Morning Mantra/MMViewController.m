@@ -8,45 +8,41 @@
 
 #import "MMViewController.h"
 #import "MMDataStoreController.h"
-#import "MMCollectionViewCell.h"
+#import "MMNotificationController.h"
+#import "MMTableViewCell.h"
 
 @interface MMViewController ()
 
-@property (nonatomic, strong) MMCollectionViewCell *prototypeCell;
-@property (weak, nonatomic) IBOutlet UICollectionView *collectionView;
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 
 @end
 
 
-
 @implementation MMViewController
 
-static NSString * CellIdentifier = @"MMCollectionViewCell";
+NSString *const MMTableViewCellID = @"MMTableViewCellID";
 
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     
-    self.navigationItem.prompt = [MMDataStoreController randomMantraGreeting];
+    UINib *nib = [UINib nibWithNibName:@"MMTableViewCell" bundle:nil];
+    [self.tableView registerNib:nib forCellReuseIdentifier:MMTableViewCellID];
     
-    UINib *cellNib = [UINib nibWithNibName:@"MMCollectionViewCell" bundle:nil];
-    [self.collectionView registerNib:cellNib forCellWithReuseIdentifier:@"MMCollectionViewCell"];
-    
-    self.prototypeCell = [[cellNib instantiateWithOwner:nil options:nil] objectAtIndex:0];
-
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    [MMDataStoreController scheduleLocalNotifications];
-    
-    [self.collectionView.collectionViewLayout invalidateLayout];
+    [MMNotificationController requestPermissionForNotifications];
+    [MMNotificationController scheduleLocalNotificationWithText:[MMDataStoreController randomMantraWithNameGreeting]];
     
     if ([MMDataStoreController shouldPresentAddNameUI]) {
         [MMDataStoreController presentAddNameUIWithCompletion:nil];
@@ -56,57 +52,86 @@ static NSString * CellIdentifier = @"MMCollectionViewCell";
 - (IBAction)addMantraButtonTapped:(id)sender
 {
     [MMDataStoreController presentAddMantraUIWithCompletion:^{
-        [self.collectionView reloadData];
+        [self.tableView reloadData];
     }];
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
+{
+    [self.tableView setEditing:editing animated:animated];
+    [super setEditing:editing animated:animated]; 
+}
 
-#pragma mark - UICollectionView Methods
+#pragma mark - TableView Data Source
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [MMDataStoreController allMantras].count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    MMCollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:CellIdentifier
-                                                                                forIndexPath:indexPath];
-    [self configureCell:cell forRowAtIndexPath:indexPath];
+    return UITableViewAutomaticDimension;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    MMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MMTableViewCellID forIndexPath:indexPath];
+    
+    cell.textLabel.text = [[MMDataStoreController allMantras] objectAtIndex:indexPath.row];
     
     return cell;
 }
 
-- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+
+#pragma mark - UITableView Editing
+
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    [self configureCell:self.prototypeCell forRowAtIndexPath:indexPath];
-    
-    return [self.prototypeCell systemLayoutSizeFittingSize:UILayoutFittingCompressedSize];
-}
-
-
-
-
-#pragma Mark - Internal
-
-- (void)configureCell:(UICollectionViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if ([cell isKindOfClass:[MMCollectionViewCell class]])
+    if (editingStyle == UITableViewCellEditingStyleDelete)
     {
-        MMCollectionViewCell *textCell = (MMCollectionViewCell *)cell;
-        textCell.label.text = [MMDataStoreController allMantras][indexPath.row];
-        textCell.label.font = [UIFont preferredFontForTextStyle:UIFontTextStyleBody];
+        [MMDataStoreController removeMantra:[[MMDataStoreController allMantras] objectAtIndex:indexPath.row]];
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
+    }
+    else if (editingStyle == UITableViewCellEditingStyleInsert)
+    {
+        // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        
     }
 }
 
+#pragma mark - Copy Menu
+
+- (BOOL)tableView:(UITableView *)tableView shouldShowMenuForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return YES;
+}
+
+- (BOOL)tableView:(UITableView *)tableView canPerformAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    return (action == @selector(copy:));
+}
+
+- (void)tableView:(UITableView *)tableView performAction:(SEL)action forRowAtIndexPath:(NSIndexPath *)indexPath withSender:(id)sender
+{
+    if (action == @selector(copy:)) {
+        UITableViewCell *cell = [tableView cellForRowAtIndexPath:indexPath];
+        
+        [[UIPasteboard generalPasteboard] setString:cell.textLabel.text];
+    }
+}
+
+#pragma mark - Font Size
 
 - (void)didChangePreferredContentSize:(NSNotification *)notification
 {
-    [self.collectionView.collectionViewLayout invalidateLayout];
-//    [self.collectionView reloadData];
+    [self.tableView reloadData];
 }
-
-
 
 
 @end

@@ -8,6 +8,6 @@
 
 @import UIKit;
 
-@interface MMViewController : UIViewController <UICollectionViewDelegate, UICollectionViewDataSource>
+@interface MMViewController : UIViewController
 
 @end

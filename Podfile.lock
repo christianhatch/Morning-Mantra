@@ -1,19 +1,10 @@
 PODS:
-  - Bolts (1.1.1)
-  - Facebook-iOS-SDK (3.16.2):
-    - Bolts
-  - Tweaks (1.1.0)
   - UIAlertView-Blocks (1.0)
 
 DEPENDENCIES:
-  - Facebook-iOS-SDK
-  - Tweaks
   - UIAlertView-Blocks
 
 SPEC CHECKSUMS:
-  Bolts: 0ca796081c3e7c139bd86d6903c27f1b83036a5d
-  Facebook-iOS-SDK: 34eef640c2cc4c8618ba0f574ad2b290e07f1b4e
-  Tweaks: 05b197d4a1247288f576587546bc1932189d8c98
-  UIAlertView-Blocks: f3271e84372beb97aea115cd1fb26ae66457f12f
+  UIAlertView-Blocks: 7904744fca618afbd2ec646608924f5e69d5acd1
 
-COCOAPODS: 0.33.1
+COCOAPODS: 0.36.4

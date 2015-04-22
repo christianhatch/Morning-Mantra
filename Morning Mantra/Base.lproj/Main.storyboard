@@ -1,64 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6205" systemVersion="13E28" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="j0U-HI-5j5">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="PGN-d0-jmj">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6198"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <scenes>
-        <!--Morning Mantra-->
-        <scene sceneID="XaG-A5-Utr">
-            <objects>
-                <viewController storyboardIdentifier="MMViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="y9b-D8-siI" customClass="MMViewController" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="TmB-h2-yal"/>
-                        <viewControllerLayoutGuide type="bottom" id="V9q-FF-Hax"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="mc2-Vt-8zo">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" indicatorStyle="white" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="Uri-Qv-OYN">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
-                                <color key="backgroundColor" red="0.98374170064926147" green="0.9449470043182373" blue="0.99985206127166748" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="15" minimumInteritemSpacing="10" id="hpE-gb-4jt" customClass="TLSpringFlowLayout">
-                                    <size key="itemSize" width="310" height="60"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="3" minY="10" maxX="3" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="y9b-D8-siI" id="W9q-Gz-gIc"/>
-                                    <outlet property="delegate" destination="y9b-D8-siI" id="9qa-qn-1EV"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" red="0.95256239180000002" green="0.83856928350000004" blue="0.99969351289999997" alpha="1" colorSpace="calibratedRGB"/>
-                        <constraints>
-                            <constraint firstItem="Uri-Qv-OYN" firstAttribute="top" secondItem="mc2-Vt-8zo" secondAttribute="top" id="DGx-Jk-Xx3"/>
-                            <constraint firstAttribute="trailing" secondItem="Uri-Qv-OYN" secondAttribute="trailing" id="DXn-E5-RhC"/>
-                            <constraint firstItem="V9q-FF-Hax" firstAttribute="top" secondItem="Uri-Qv-OYN" secondAttribute="bottom" id="l3B-8P-4xi"/>
-                            <constraint firstItem="Uri-Qv-OYN" firstAttribute="leading" secondItem="mc2-Vt-8zo" secondAttribute="leading" id="ugr-Sk-Pvn"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="Morning Mantra" id="pAC-tm-S5o">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="vsy-CT-9FX">
-                            <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="addMantraButtonTapped:" destination="y9b-D8-siI" id="fiX-gY-nRP"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" enabled="NO" systemItem="edit" id="30D-SS-rFv">
-                            <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
-                    </navigationItem>
-                    <connections>
-                        <outlet property="collectionView" destination="Uri-Qv-OYN" id="1pG-EM-hsO"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="B7C-Cq-V1Z" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="938" y="100"/>
-        </scene>
         <!--Navigation Controller-->
         <scene sceneID="NhV-KR-LG6">
             <objects>
@@ -75,20 +20,128 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="y9b-D8-siI" kind="relationship" relationship="rootViewController" id="PWI-HU-O2P"/>
+                        <segue destination="scM-0P-rlj" kind="relationship" relationship="rootViewController" id="qP2-HY-fbl"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bE5-dF-T7S" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="442" y="100"/>
+            <point key="canvasLocation" x="443" y="100"/>
+        </scene>
+        <!--Morning Mantra-->
+        <scene sceneID="cvc-tu-2vr">
+            <objects>
+                <tableViewController storyboardIdentifier="MMTableViewCell" useStoryboardIdentifierAsRestorationIdentifier="YES" id="scM-0P-rlj" customClass="MMViewController" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" keyboardDismissMode="interactive" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="22" sectionFooterHeight="22" id="U43-ER-yAL">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="scM-0P-rlj" id="8Z3-ov-JFd"/>
+                            <outlet property="delegate" destination="scM-0P-rlj" id="jtb-Mo-D15"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Morning Mantra" id="TM4-WZ-6Kj">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="3Nf-gT-Z3K">
+                            <connections>
+                                <action selector="addMantraButtonTapped:" destination="scM-0P-rlj" id="51f-Ve-bhO"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="Mzf-CB-vk4"/>
+                    </navigationItem>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cWl-es-3zM" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="897" y="100"/>
+        </scene>
+        <!--Morning Mantra-->
+        <scene sceneID="UGa-vT-ZXB">
+            <objects>
+                <viewController id="cP6-D7-DbX" customClass="MMViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="TFC-Qe-JG8"/>
+                        <viewControllerLayoutGuide type="bottom" id="WVq-F6-Rz9"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="lRI-JZ-aCs">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="redraw" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MMLaunch" translatesAutoresizingMaskIntoConstraints="NO" id="CCa-cc-pke">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="7AQ-hD-OgW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="504"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <inset key="scrollIndicatorInsets" minX="0.0" minY="64" maxX="0.0" maxY="0.0"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cP6-D7-DbX" id="dCD-gz-tgh"/>
+                                    <outlet property="delegate" destination="cP6-D7-DbX" id="pSk-9A-bNg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="7AQ-hD-OgW" secondAttribute="trailing" id="6fo-jL-LRI"/>
+                            <constraint firstAttribute="bottom" secondItem="CCa-cc-pke" secondAttribute="bottom" id="YP9-Ic-acO"/>
+                            <constraint firstItem="7AQ-hD-OgW" firstAttribute="top" secondItem="lRI-JZ-aCs" secondAttribute="top" id="a6g-fc-DEk"/>
+                            <constraint firstItem="7AQ-hD-OgW" firstAttribute="leading" secondItem="lRI-JZ-aCs" secondAttribute="leading" id="goX-Sx-om5"/>
+                            <constraint firstItem="WVq-F6-Rz9" firstAttribute="top" secondItem="7AQ-hD-OgW" secondAttribute="bottom" id="je5-Jf-HFN"/>
+                            <constraint firstItem="CCa-cc-pke" firstAttribute="top" secondItem="lRI-JZ-aCs" secondAttribute="top" id="lj0-qt-eud"/>
+                            <constraint firstItem="CCa-cc-pke" firstAttribute="leading" secondItem="lRI-JZ-aCs" secondAttribute="leading" id="tNZ-VI-ZAH"/>
+                            <constraint firstAttribute="trailing" secondItem="CCa-cc-pke" secondAttribute="trailing" id="yT2-iK-m96"/>
+                        </constraints>
+                    </view>
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
+                    <navigationItem key="navigationItem" title="Morning Mantra" id="YaK-eb-B6R">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="U8J-fO-Tz2">
+                            <connections>
+                                <action selector="addMantraButtonTapped:" destination="cP6-D7-DbX" id="3ZY-Vz-TXa"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="edit" id="C0C-9z-DAy">
+                            <connections>
+                                <action selector="editButtonTapped:" destination="cP6-D7-DbX" id="9X0-OQ-8AI"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
+                    <connections>
+                        <outlet property="tableView" destination="7AQ-hD-OgW" id="Yd8-Pk-9Um"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fsn-sl-RPn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2142" y="100"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="he6-AQ-nNN">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PGN-d0-jmj" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="0Iw-Fs-0wC">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="8cR-x2-YTA">
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                    </toolbar>
+                    <connections>
+                        <segue destination="cP6-D7-DbX" kind="relationship" relationship="rootViewController" id="C3T-60-pgr"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bkX-7W-TWl" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1667" y="100"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="MMLaunch" width="1536" height="2048"/>
+    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination">
-            <size key="portraitSize" width="320" height="480"/>
-            <size key="landscapeSize" width="480" height="320"/>
-        </simulatedScreenMetrics>
+        <simulatedScreenMetrics key="destination"/>
     </simulatedMetricsContainer>
+    <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
 </document>

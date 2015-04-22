@@ -13,14 +13,13 @@
 
 + (NSArray *)allMantras;
 
-+ (NSString *)randomMantraGreeting;
++ (NSString *)randomMantraWithNameGreeting;
 
 + (void)addMantra:(NSString *)mantra;
 
 + (void)removeMantra:(NSString *)mantra;
 
-
-+ (void)scheduleLocalNotifications;
++ (void)setNameForGreeting:(NSString *)name; 
 
 @end
 
