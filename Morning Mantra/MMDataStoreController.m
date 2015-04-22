@@ -244,11 +244,13 @@ NSString *const kMMDataStoreControllerUserGreetingNameKey = @"com.knotlabs.kMMDa
         
         if (_allMantras.count == 0)
         {
-            _allMantras = [[NSMutableArray alloc] initWithArray:@[@"Have a mantra.",
+            _allMantras = [[NSMutableArray alloc] initWithArray:@[
+                                                                  @"Have a mantra.",
                                                                   @"Life is a marathon, not a sprint.",
                                                                   @"Everything is built in small steps.",
                                                                   @"Write stuff down.",
                                                                   @"A goal isn’t a goal unless you have to reach for it.",
+                                                                  @"If you look around and you are the smartest person in the room, find a different room",
                                                                   ]
                                                       copyItems:YES];
         }
