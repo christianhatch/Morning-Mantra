@@ -39,7 +39,7 @@
     UILocalNotification *localNote = [[UILocalNotification alloc] init];
     localNote.timeZone = [NSTimeZone defaultTimeZone];
     localNote.fireDate = dateToFire;
-//    localNote.fireDate = [[NSDate date] dateByAddingTimeInterval:5]; //this is just for testing!
+//    localNote.fireDate = [NSDate dateWithTimeIntervalSinceNow:5]; //this is just for testing!
     localNote.alertBody = text;
     localNote.alertAction = @"view";
     

@@ -84,6 +84,7 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     MMTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:MMTableViewCellID forIndexPath:indexPath];
     
     cell.textLabel.text = [[MMDataStoreController allMantras] objectAtIndex:indexPath.row];
+    cell.backgroundColor = [UIColor clearColor];
     
     return cell;
 }
