@@ -27,7 +27,7 @@
     [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
     
     NSString *total = [NSString stringWithFormat:@"%i", (int)[MMDataStoreController allMantras].count];
-    [PFAnalytics trackEvent:@"Total Mantras" dimensions:@{@"total" : total}];
+    [PFAnalytics trackEvent:@"TotalMantras" dimensions:@{@"total" : total}];
     
     [Crashlytics startWithAPIKey:kMMCrashlyticsID];
     
