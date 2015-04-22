@@ -8,24 +8,26 @@
 
 #import "AppDelegate.h"
 #import <Crashlytics/Crashlytics.h>
-//#import <Parse/Parse.h>
+#import <Parse/Parse.h>
 #import "MMDataStoreController.h"
 #import "MMConstants.h"
 
 
 @interface AppDelegate ()
-
 @end
+
 
 @implementation AppDelegate
 
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {   
-//    [Parse setApplicationId:kMMParseAppID
-//                  clientKey:kMMParseClientKey];
-//    
-//    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    [Parse setApplicationId:kMMParseAppID
+                  clientKey:kMMParseClientKey];
+
+    [PFAnalytics trackAppOpenedWithLaunchOptions:launchOptions];
+    
+    NSString *total = [NSString stringWithFormat:@"%i", (int)[MMDataStoreController allMantras].count];
+    [PFAnalytics trackEvent:@"Total Mantras" dimensions:@{@"total" : total}];
     
     [Crashlytics startWithAPIKey:kMMCrashlyticsID];
     
