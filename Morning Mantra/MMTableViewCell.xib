@@ -12,7 +12,7 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="xVh-gV-ylm" id="bSo-34-yOa">
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="The only way out is up" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d7e-8J-H4X">
+                    <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="I love sailing" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="d7e-8J-H4X">
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>

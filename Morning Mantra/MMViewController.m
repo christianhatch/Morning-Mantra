@@ -29,12 +29,12 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     UINib *nib = [UINib nibWithNibName:@"MMTableViewCell" bundle:nil];
     [self.tableView registerNib:nib forCellReuseIdentifier:MMTableViewCellID];
     
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(didChangePreferredContentSize:)
                                                  name:UIContentSizeCategoryDidChangeNotification
                                                object:nil];
+    
+    self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 
 - (void)viewDidAppear:(BOOL)animated
@@ -56,9 +56,10 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     }];
 }
 
-- (IBAction)editButtonTapped:(id)sender
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated
 {
-    
+    [self.tableView setEditing:editing animated:animated];
+    [super setEditing:editing animated:animated]; 
 }
 
 #pragma mark - TableView Data Source
@@ -71,11 +72,6 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
     return [MMDataStoreController allMantras].count;
-}
-
-- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewAutomaticDimension;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView estimatedHeightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -100,10 +96,7 @@ NSString *const MMTableViewCellID = @"MMTableViewCellID";
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         [MMDataStoreController removeMantra:[[MMDataStoreController allMantras] objectAtIndex:indexPath.row]];
-//        [tableView reloadData];
-        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft]; 
-        
-        self.editing = NO;
+        [self.tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationLeft];
     }
     else if (editingStyle == UITableViewCellEditingStyleInsert)
     {
